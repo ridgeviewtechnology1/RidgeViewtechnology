@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RidgeView Event Technology — Live Event Production & Rentals</title>
+<link rel="icon" type="image/png" href="mountain-logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800;900&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#2a7de1;--blue-dark:#1a5fb4;--blue-light:#1a2540;--blue-mid:#4a90d9;--orange:#2a7de1;--orange-light:#1a2540;--g100:#111827;--g200:#1e2a3a;--g300:#2d3a4e;--g500:#8a96aa;--g700:#c0c8d8;--g900:#f0f4ff;--white:#0a0e17;--black:#0a0e17;--card:#131c2e;--sm:0 2px 8px rgba(0,0,0,.4);--md:0 6px 24px rgba(0,0,0,.5);--lg:0 16px 48px rgba(0,0,0,.6);--r:10px;--rl:16px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:#0a0e17;color:#e8edf5;font-family:'Raleway',sans-serif;line-height:1.6;overflow-x:hidden}
+.page{display:none}.page.active{display:block}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:200;background:#000;border-bottom:1px solid #111;box-shadow:0 2px 12px rgba(0,0,0,.6);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:70px}
+.logo{font-family:'Montserrat',sans-serif;font-size:1.3rem;font-weight:400;color:#fff;cursor:pointer;letter-spacing:.01em;display:flex;flex-direction:column;line-height:1.1}
+.logo-main{font-size:1.35rem;font-weight:500;color:#fff;letter-spacing:.02em;font-family:'Montserrat',sans-serif}
+.logo-sub{font-size:.52rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:#8a96aa}
+.nl{display:flex;gap:.2rem;list-style:none}
+.nl a{font-family:'Montserrat',sans-serif;font-size:.93rem;font-weight:500;color:#a0acbf;padding:.45rem .85rem;border-radius:6px;cursor:pointer;transition:color .15s,background .15s}
+.nl a:hover,.nl a.active{color:#fff;background:rgba(42,125,225,.2)}
+.na{display:flex;gap:.7rem;align-items:center}
+.bno{font-family:'Montserrat',sans-serif;font-size:.88rem;font-weight:500;color:var(--blue);border:2px solid var(--blue);background:transparent;padding:.48rem 1.1rem;border-radius:6px;cursor:pointer;transition:all .15s}
+.bno:hover{background:var(--blue);color:#fff}
+.bnp{font-family:'Montserrat',sans-serif;font-size:.88rem;font-weight:500;color:#fff;background:var(--blue);border:none;padding:.5rem 1.3rem;border-radius:6px;cursor:pointer;transition:background .15s,transform .1s}
+.bnp:hover{background:var(--blue-dark);transform:translateY(-1px)}
+
+/* SHARED UTILITIES */
+.con{max-width:1200px;margin:0 auto;padding:0 2rem}
+.sp{padding:5rem 0}
+.stag{display:inline-block;font-family:'Montserrat',sans-serif;font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);background:rgba(42,125,225,.15);border:1px solid rgba(42,125,225,.3);padding:.27rem .8rem;border-radius:20px;margin-bottom:.9rem}
+h2.st{font-family:'Montserrat',sans-serif;font-size:clamp(1.85rem,3.5vw,2.7rem);font-weight:600;line-height:1.2;margin-bottom:1rem;color:#fff}
+.sd{font-size:1.03rem;color:#8a96aa;max-width:56ch;line-height:1.75;margin-bottom:2.5rem}
+.bp{font-family:'Montserrat',sans-serif;font-size:1rem;font-weight:500;color:#fff;background:var(--orange);border:none;padding:.85rem 2rem;border-radius:8px;cursor:pointer;display:inline-block;transition:background .15s,transform .1s}
+.bp:hover{background:var(--blue-dark);transform:translateY(-1px)}
+.bs{font-family:'Montserrat',sans-serif;font-size:1rem;font-weight:500;color:var(--blue);background:transparent;border:2px solid var(--blue);padding:.82rem 2rem;border-radius:8px;cursor:pointer;display:inline-block;transition:all .15s}
+.bs:hover{background:var(--blue);color:#fff}
+.bb{font-family:'Montserrat',sans-serif;font-size:1rem;font-weight:500;color:#fff;background:var(--blue);border:none;padding:.85rem 2rem;border-radius:8px;cursor:pointer;display:inline-block;transition:background .15s,transform .1s}
+.bb:hover{background:var(--blue-dark);transform:translateY(-1px)}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* FOOTER */
+footer{background:#0a0e17;border-top:1px solid #1e2a3a}
+.fm{padding:3rem 2rem;max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:3rem}
+.fm-left{display:flex;flex-direction:column;gap:.4rem}
+.fm-brand{font-family:'Montserrat',sans-serif;font-size:1.25rem;font-weight:600;color:#fff;cursor:pointer;margin:0;letter-spacing:.5px}
+.fm-desc{font-size:.85rem;color:#8a96aa;margin:0}
+.fm-right{display:flex;align-items:center;gap:2,5rem;white-space:nowrap}
+.fm-phone{font-size:.9rem;color:#a0acbf;font-family:'Raleway',sans-serif}
+.fb{border-top:1px solid #1e2a3a;padding:1.8rem 2rem;max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;font-size:.75rem;color:#5a6a85}
+.fbl{font-family:'Montserrat',sans-serif;font-size:1.3rem;font-weight:600;color:#fff;margin-bottom:.2rem;cursor:pointer;line-height:1.1;display:flex;flex-direction:column}
+.fbl-sub{font-size:.5rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:#8a96aa;display:block;margin-bottom:.7rem}
+.ftag{font-size:.87rem;color:var(--g500);line-height:1.7;max-width:28ch;margin-bottom:1.2rem}
+.fph{font-family:'Raleway',sans-serif;font-size:1.15rem;font-weight:600;color:#fff}
+.fc h4{font-family:'Raleway',sans-serif;font-size:.78rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#fff;margin-bottom:.9rem}
+.fc ul{list-style:none;display:flex;flex-direction:column;gap:.45rem}
+.fc a{font-size:.85rem;color:var(--g500);cursor:pointer;transition:color .15s}
+.fc a:hover{color:#fff}
+@media(max-width:768px){.fm{flex-direction:column;align-items:flex-start;gap:1.5rem;padding:2rem}.fm-right{flex-direction:column;align-items:flex-start;gap:1rem;width:100%}.fb{flex-direction:column;gap:.8rem;text-align:left}}
+
+/* ── HOME ── */
+.hero{position:relative;color:#fff;padding:6rem 2rem 5rem;overflow:hidden;min-height:92vh;display:flex;align-items:center}
+.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(6,9,18,.88) 0%,rgba(10,20,50,.75) 50%,rgba(15,30,70,.6) 100%);z-index:1}
+.hero::before{display:none}
+.hi{max-width:1200px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;position:relative;z-index:2}
+.htag{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);padding:.38rem 1rem;border-radius:20px;font-size:.79rem;font-weight:500;font-family:'Montserrat',sans-serif;margin-bottom:1.5rem}
+.htag::before{content:'●';color:#7fffb0;font-size:.58rem}
+.hi h1{font-family:'Montserrat',sans-serif;font-size:clamp(2.2rem,5vw,3.5rem);font-weight:600;line-height:1.15;margin-bottom:1.2rem}
+.hsub{font-size:1.03rem;color:rgba(255,255,255,.82);line-height:1.75;max-width:44ch;margin-bottom:2.2rem}
+.hbtns{display:flex;gap:1rem;flex-wrap:wrap}
+.bhw{font-family:'Montserrat',sans-serif;font-size:1rem;font-weight:500;color:var(--blue-dark);background:#fff;border:none;padding:.9rem 2rem;border-radius:8px;cursor:pointer;transition:transform .1s,box-shadow .15s}
+.bhw:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.2)}
+.bhg{font-family:'Montserrat',sans-serif;font-size:1rem;font-weight:500;color:#fff;background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.5);padding:.88rem 2rem;border-radius:8px;cursor:pointer;transition:background .15s}
+.bhg:hover{background:rgba(255,255,255,.25)}
+.htrust{margin-top:2.5rem;display:flex;gap:1.5rem;flex-wrap:wrap;font-size:.83rem;color:rgba(255,255,255,.7)}
+.htrust span::before{content:'✓ ';color:#7fffb0;font-weight:500}
+.hv{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}
+.hvc{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.2);border-radius:var(--r);padding:1.1rem 1.2rem;transition:transform .2s}
+.hvc:hover{transform:translateY(-3px)}
+.hvc.wide{grid-column:1/-1;display:flex;align-items:center;gap:1rem}
+.hvi{font-size:1.75rem}
+.hvn{font-family:'Montserrat',sans-serif;font-weight:600;font-size:.86rem;color:#fff;margin-bottom:.1rem}
+.hvp{font-size:.73rem;color:rgba(255,255,255,.65)}
+.hvb{display:inline-block;font-size:.62rem;font-weight:500;font-family:'Montserrat',sans-serif;padding:.16rem .46rem;border-radius:4px;background:rgba(255,255,255,.2);color:#fff;margin-top:.28rem}
+
+/* TRUST STRIP */
+.ts{background:#0d1520;border-bottom:1px solid #1e2a3a;border-top:1px solid #1e2a3a;padding:1.2rem 2rem}
+.tsi{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap}
+.ti{display:flex;align-items:center;gap:.5rem;font-size:.85rem;font-weight:600;color:#a0acbf;font-family:'Raleway',sans-serif}
+.tdiv{width:1px;height:22px;background:#2d3a4e}
+
+/* CATEGORY GRID */
+.cg{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.cc{border:1.5px solid #1e2a3a;border-radius:var(--rl);overflow:hidden;cursor:pointer;transition:box-shadow .2s,transform .2s,border-color .2s;color:inherit;display:block;background:#131c2e;text-decoration:none}
+.cc:hover{box-shadow:var(--lg);transform:translateY(-4px);border-color:var(--blue)}
+.cimg{height:148px;display:flex;align-items:center;justify-content:center;font-size:3.6rem}
+.ca{background:linear-gradient(135deg,#0f1e35,#1a3a5c)}
+.cl{background:linear-gradient(135deg,#0f1e35,#1a3a5c)}
+.cv{background:linear-gradient(135deg,#0f1e35,#1a3a5c)}
+.cw{background:linear-gradient(135deg,#0f1e35,#1a3a5c)}
+.cp{background:linear-gradient(135deg,#0f1e35,#1a3a5c)}
+.cs{background:linear-gradient(135deg,#0f1e35,#1a3a5c)}
+.cbody{padding:1.15rem 1.3rem 1.4rem}
+.cname{font-family:'Montserrat',sans-serif;font-weight:600;font-size:1.02rem;color:#fff;margin-bottom:.27rem}
+.cdesc{font-size:.83rem;color:#8a96aa;line-height:1.55;margin-bottom:.85rem}
+.clink{font-family:'Raleway',sans-serif;font-size:.82rem;font-weight:600;color:var(--blue);display:inline-flex;align-items:center;gap:.3rem}
+.clink::after{content:'→';transition:transform .15s}
+.cc:hover .clink::after{transform:translateX(4px)}
+
+/* HOW IT WORKS */
+.how-bg{background:#0d1520}
+.hsteps{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem}
+.hstep{text-align:center}
+.hsnum{width:50px;height:50px;border-radius:50%;background:var(--blue);color:#fff;font-family:'Montserrat',sans-serif;font-weight:600;font-size:1.2rem;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;box-shadow:0 4px 16px rgba(42,125,225,.4)}
+.hstitle{font-family:'Montserrat',sans-serif;font-weight:600;font-size:.96rem;color:#fff;margin-bottom:.4rem}
+.hsdesc{font-size:.84rem;color:#8a96aa;line-height:1.6}
+
+/* PRODUCT CARDS */
+.ptabs{display:flex;gap:.5rem;margin-bottom:2rem;flex-wrap:wrap}
+.ptab{font-family:'Raleway',sans-serif;font-size:.86rem;font-weight:500;padding:.42rem 1rem;border:1.5px solid #2d3a4e;border-radius:20px;background:transparent;color:#8a96aa;cursor:pointer;transition:all .15s}
+.ptab.active,.ptab:hover{background:var(--blue);border-color:var(--blue);color:#fff}
+.pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem}
+.pcard{border:1.5px solid #1e2a3a;border-radius:var(--r);overflow:hidden;background:#131c2e;cursor:pointer;transition:box-shadow .2s,transform .2s}
+.pcard:hover{box-shadow:var(--md);transform:translateY(-3px)}
+.pimg{height:142px;display:flex;align-items:center;justify-content:center;font-size:3rem;background:#0d1520;position:relative}
+.pbadge{position:absolute;top:.55rem;left:.55rem;font-family:'Raleway',sans-serif;font-size:.61rem;font-weight:600;padding:.17rem .5rem;border-radius:4px}
+.pbb{background:var(--blue);color:#fff}
+.pbr{background:var(--blue-dark);color:#fff}
+.pbbr{background:#16a34a;color:#fff}
+.pbody{padding:.88rem 1rem 1.05rem}
+.pbrand{font-size:.67rem;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--blue);margin-bottom:.16rem;font-family:'Montserrat',sans-serif}
+.pname{font-family:'Montserrat',sans-serif;font-weight:500;font-size:.86rem;color:#fff;margin-bottom:.5rem;line-height:1.3}
+.pprice{font-family:'Montserrat',sans-serif;font-weight:600;font-size:1.1rem;color:#fff}
+.pprice small{font-size:.68rem;font-weight:400;color:#8a96aa}
+.pacts{display:flex;gap:.45rem;margin-top:.65rem}
+.pab{flex:1;padding:.43rem;font-family:'Raleway',sans-serif;font-size:.71rem;font-weight:500;border:none;border-radius:6px;cursor:pointer;transition:all .15s}
+.pabp{background:var(--blue);color:#fff}.pabp:hover{background:var(--blue-dark)}
+.pabo{background:transparent;color:var(--blue);border:1.5px solid var(--blue)}.pabo:hover{background:rgba(42,125,225,.15)}
+
+/* TESTIMONIALS */
+.testsec{background:#0a0e17;color:#fff}
+.tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.tcard{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:var(--rl);padding:2rem}
+.tstars{color:#fbbf24;font-size:.88rem;letter-spacing:.08em;margin-bottom:.85rem}
+.ttext{font-size:.92rem;color:rgba(255,255,255,.85);line-height:1.7;margin-bottom:1.5rem;font-style:italic}
+.tauth{display:flex;align-items:center;gap:.7rem}
+.tav{width:37px;height:37px;border-radius:50%;background:var(--blue-mid);display:flex;align-items:center;justify-content:center;font-family:'Raleway',sans-serif;font-weight:600;font-size:.8rem;color:#fff;flex-shrink:0}
+.tname{font-family:'Raleway',sans-serif;font-weight:500;font-size:.86rem;color:#fff}
+.trole{font-size:.74rem;color:rgba(255,255,255,.5)}
+
+/* WHY US */
+.wgrid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.wvis{background:#131c2e;border:1px solid #1e2a3a;border-radius:var(--rl);padding:2.5rem;display:flex;flex-direction:column;gap:1rem}
+.wstat{background:#0d1520;border:1px solid #1e2a3a;border-radius:var(--r);padding:1rem 1.35rem;box-shadow:var(--sm)}
+.wsnum{font-family:'Raleway',sans-serif;font-weight:600;font-size:1.85rem;color:var(--blue);line-height:1}
+.wslabel{font-size:.82rem;color:#8a96aa;font-weight:600}
+.wfeats{list-style:none;display:flex;flex-direction:column;gap:1rem;margin-top:1.2rem}
+.wf{display:flex;gap:1rem;align-items:flex-start}
+.wficon{width:37px;height:37px;background:rgba(42,125,225,.15);border:1px solid rgba(42,125,225,.3);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.05rem;flex-shrink:0}
+.wftitle{font-family:'Raleway',sans-serif;font-weight:600;font-size:.91rem;color:#fff;margin-bottom:.12rem}
+.wfdesc{font-size:.82rem;color:#8a96aa;line-height:1.55}
+
+/* CTA BAND */
+.ctaband{background:linear-gradient(135deg,#0a0e17,#1a2235);color:#fff;padding:4.5rem 2rem;text-align:center}
+.ctaband h2{font-family:'Raleway',sans-serif;font-size:clamp(1.8rem,3vw,2.5rem);font-weight:600;color:#fff;margin-bottom:.75rem}
+.ctaband p{font-size:1.03rem;color:rgba(255,255,255,.85);max-width:52ch;margin:0 auto 2.5rem;line-height:1.7}
+.ctabtns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.bcw{font-family:'Montserrat',sans-serif;font-weight:500;font-size:1rem;color:#fff;background:var(--blue);border:none;padding:.9rem 2.2rem;border-radius:8px;cursor:pointer;transition:transform .1s,box-shadow .15s}
+.bcw:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.3)}
+.bcg{font-family:'Montserrat',sans-serif;font-weight:500;font-size:1rem;color:#fff;background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.6);padding:.88rem 2.2rem;border-radius:8px;cursor:pointer;transition:background .15s}
+.bcg:hover{background:rgba(255,255,255,.25)}
+
+/* PAGE HERO (inner pages) */
+.phero{background:linear-gradient(135deg,#0a0e17,var(--blue));padding:0 2rem;color:#fff;text-align:left}
+.phero h1{font-family:'Montserrat',sans-serif;font-size:clamp(2rem,4vw,3rem);font-weight:600;margin-bottom:.75rem}
+.phero p{font-size:1.03rem;color:rgba(255,255,255,.8);max-width:52ch;margin:0 auto}
+
+/* SHOP PAGE */
+.slayout{max-width:1200px;margin:0 auto;padding:3rem 2rem;display:grid;grid-template-columns:228px 1fr;gap:2.5rem}
+.sidebar{align-self:start;position:sticky;top:88px}
+.sbox{background:#131c2e;border:1.5px solid #1e2a3a;border-radius:var(--r);padding:1.35rem;margin-bottom:1.1rem}
+.sbox h4{font-family:'Raleway',sans-serif;font-weight:600;font-size:.79rem;color:#fff;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.85rem}
+.ck{display:flex;align-items:center;gap:.55rem;margin-bottom:.5rem;cursor:pointer}
+.ck input{accent-color:var(--blue);width:14px;height:14px;cursor:pointer}
+.ck label{font-size:.84rem;color:#a0acbf;cursor:pointer;transition:color .15s}
+.ck:hover label{color:var(--blue)}
+.rinput{accent-color:var(--blue);width:100%;margin-bottom:.4rem}
+.rrow{display:flex;justify-content:space-between;font-size:.74rem;color:#8a96aa}
+.shophead{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem}
+.shopcount{font-size:.88rem;color:#8a96aa;font-weight:600;font-family:'Raleway',sans-serif}
+.shopsort{font-size:.84rem;border:1.5px solid #2d3a4e;border-radius:6px;padding:.36rem .7rem;color:#e8edf5;background:#131c2e;cursor:pointer}
+.sgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+
+/* SERVICES PAGE */
+.process-hero{padding:5rem 2rem 2.5rem 2rem;max-width:1000px;margin:0 auto 0 auto;text-align:left}
+.process-title{font-family:'Montserrat',sans-serif;font-size:clamp(2.3rem,5vw,3.2rem);font-weight:700;color:#fff;margin-bottom:1.1rem;line-height:1.1;letter-spacing:-.5px}
+.process-intro{font-size:1.13rem;color:#a0acbf;line-height:1.7;margin-bottom:2.8rem;max-width:600px}
+.process-steps-wrap{max-width:1000px;margin:0 auto 0 auto;display:flex;flex-direction:column;gap:3.2rem;padding-bottom:2.5rem}
+.process-step{display:flex;align-items:flex-start;gap:2.2rem}
+.process-number{font-family:'Montserrat',sans-serif;font-size:1.5rem;font-weight:700;color:var(--blue);flex-shrink:0;line-height:1.1;margin-top:.1em;min-width:2.5em;letter-spacing:.02em}
+.process-step-title{font-family:'Montserrat',sans-serif;font-weight:600;font-size:1.18rem;color:#fff;margin:0 0 .5rem 0;line-height:1.3}
+.process-step-text{font-size:.98rem;color:#8a96aa;line-height:1.7;margin:0}
+.process-closing{max-width:1000px;margin:2.5rem auto 0 auto;font-size:1.08rem;color:#a0acbf;line-height:1.7;padding-bottom:4rem}
+@media(max-width:900px){.process-hero{padding:3.5rem 1.2rem 1.5rem 1.2rem}.process-steps-wrap{padding-bottom:1.5rem}}
+@media(max-width:600px){.process-hero{padding:2.2rem 1rem 1rem 1rem}.process-title{font-size:clamp(1.5rem,4vw,2.1rem)}.process-steps-wrap{gap:2.1rem}.process-step{gap:1.1rem}.process-number{font-size:1.1rem;min-width:2em}}
+
+/* ABOUT PAGE */
+.about-intro{max-width:1200px;margin:0 auto;padding:5rem 2rem;display:flex;flex-direction:column;gap:2rem;align-items:center;text-align:center}
+.about-intro > div{max-width:700px}
+.about-vis{background:#131c2e;border:1px solid #1e2a3a;border-radius:var(--rl);padding:2.5rem;display:flex;flex-direction:column;gap:1rem}
+.about-stat{background:#0d1520;border:1px solid #1e2a3a;border-radius:var(--r);padding:1.1rem 1.35rem;box-shadow:var(--sm);display:flex;align-items:center;gap:1rem}
+.about-stat-icon{font-size:1.9rem;flex-shrink:0}
+.about-stat-num{font-family:'Raleway',sans-serif;font-weight:600;font-size:1.7rem;color:var(--blue);line-height:1}
+.about-stat-label{font-size:.8rem;color:#8a96aa;font-weight:600}
+.about-founders{background:#0d1520;padding:5rem 2rem}
+.founders-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;max-width:1200px;margin:0 auto}
+.founder-card{background:#131c2e;border:1.5px solid #1e2a3a;border-radius:var(--rl);padding:2.2rem;box-shadow:var(--sm);display:flex;gap:1.5rem;align-items:flex-start}
+.founder-av{width:64px;height:64px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;font-family:'Raleway',sans-serif;font-weight:600;font-size:1.35rem;color:#fff;flex-shrink:0}
+.founder-name{font-family:'Raleway',sans-serif;font-weight:600;font-size:1.1rem;color:#fff;margin-bottom:.15rem}
+.founder-role{font-size:.78rem;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--blue);margin-bottom:.65rem;font-family:'Raleway',sans-serif}
+.founder-bio{font-size:.86rem;color:#8a96aa;line-height:1.65}
+.about-purpose{background:linear-gradient(135deg,#0a0e17,#111827);color:#fff;padding:5rem 2rem;text-align:center;display:flex;flex-direction:column;align-items:center}
+.about-purpose h2{font-family:'Raleway',sans-serif;font-size:clamp(1.8rem,3vw,2.5rem);font-weight:600;color:#fff;margin-bottom:1rem;max-width:700px}
+.about-purpose p{font-size:1.05rem;color:rgba(255,255,255,.75);max-width:700px;margin:0 auto;line-height:1.8}
+.process-section{padding:6rem 2rem}
+.process-heading{font-family:'Montserrat',sans-serif;font-size:clamp(2rem,4vw,2.8rem);font-weight:600;color:#fff;margin-bottom:1rem;line-height:1.2}
+.process-intro{font-size:1rem;color:#a0acbf;line-height:1.7;margin-bottom:4rem;max-width:700px}
+.process-steps{display:flex;flex-direction:column;gap:3.5rem}
+.process-step{display:flex;gap:2.5rem;align-items:flex-start}
+.process-number{font-family:'Montserrat',sans-serif;font-size:1.5rem;font-weight:600;color:var(--blue);flex-shrink:0;line-height:1.2}
+.process-step-title{font-family:'Montserrat',sans-serif;font-weight:600;font-size:1.1rem;color:#fff;margin:0 0 .6rem 0;line-height:1.3}
+.process-step-text{font-size:.95rem;color:#8a96aa;line-height:1.75;margin:0}
+@media(max-width:768px){.process-section{padding:4rem 1.5rem}.process-step{gap:1.8rem}.process-number{font-size:1.2rem}}
+@media(max-width:520px){.process-section{padding:3rem 1.5rem}.process-heading{font-size:clamp(1.6rem,3vw,2.2rem)}.process-step{gap:1.5rem}.process-number{font-size:1rem}}
+.about-events{background:#0d1520;padding:5rem 2rem}
+.events-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:3rem;max-width:1200px;margin:0 auto}
+.event-item{border-left:3px solid var(--blue);padding-left:1.8rem}
+.event-title{font-family:'Montserrat',sans-serif;font-weight:600;font-size:1.1rem;color:#fff;margin:0 0 .8rem 0;letter-spacing:.4px}
+.event-desc{font-size:.95rem;color:#8a96aa;line-height:1.75;margin:0}
+@media(max-width:768px){.events-grid{grid-template-columns:1fr;gap:2.5rem}.event-item{padding-left:1.5rem}}
+@media(max-width:520px){.about-events{padding:3rem 1.5rem}.events-grid{gap:1.8rem}}  
+.event-pill span{display:block;font-size:1.5rem;margin-bottom:.4rem}
+@media(max-width:900px){.about-intro{padding:3rem 1.5rem}.founders-grid{grid-template-columns:1fr}.events-grid{grid-template-columns:1fr 1fr}.founder-section{grid-template-columns:1fr !important;gap:2rem !important}.founder-section > div:last-child{order:-1}}
+@media(max-width:600px){.events-grid{grid-template-columns:1fr}.about-intro{padding:3rem 1.5rem}}
+
+/* CONTACT PAGE */
+.clayout{max-width:1200px;margin:0 auto;padding:5rem 2rem;display:grid;grid-template-columns:1.2fr 1fr;gap:5rem}
+.cformwrap{background:#131c2e;border:1.5px solid #1e2a3a;border-radius:var(--rl);padding:2.4rem;box-shadow:var(--sm)}
+.cformwrap h3{font-family:'Raleway',sans-serif;font-weight:600;font-size:1.42rem;color:#fff;margin-bottom:.32rem}
+.csub{font-size:.86rem;color:#8a96aa;margin-bottom:1.7rem}
+.fg{display:flex;flex-direction:column;gap:.3rem;margin-bottom:.95rem}
+.fg label{font-family:'Raleway',sans-serif;font-size:.78rem;font-weight:500;color:#a0acbf}
+.fg input,.fg textarea,.fg select{border:1.5px solid #2d3a4e;border-radius:7px;padding:.66rem .88rem;font-family:'Raleway',sans-serif;font-size:.88rem;color:#e8edf5;background:#0d1520;outline:none;transition:border-color .15s,box-shadow .15s;width:100%}
+.fg input:focus,.fg textarea:focus,.fg select:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(42,125,225,.15)}
+.fg textarea{min-height:110px;resize:vertical}
+.fgrow{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+.cinfobox{display:flex;flex-direction:column;gap:1.35rem}
+.cinfobox h3{font-family:'Raleway',sans-serif;font-weight:600;font-size:1.42rem;color:#fff}
+.cph{font-family:'Raleway',sans-serif;font-weight:600;font-size:1.85rem;color:var(--blue);margin:.22rem 0 .4rem}
+.ccard{background:#131c2e;border:1px solid #1e2a3a;border-radius:var(--r);padding:1.25rem 1.35rem;display:flex;gap:.95rem;align-items:flex-start}
+.ccicon{width:39px;height:39px;background:rgba(42,125,225,.15);border:1px solid rgba(42,125,225,.3);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.05rem;flex-shrink:0}
+.cctitle{font-family:'Raleway',sans-serif;font-weight:600;font-size:.84rem;color:#fff;margin-bottom:.16rem}
+.ccbody{font-size:.82rem;color:#8a96aa;line-height:1.65}
+.mapbox{background:#131c2e;border:1px solid #1e2a3a;border-radius:var(--rl);height:180px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.mapgrid{position:absolute;inset:0;background-image:linear-gradient(rgba(42,125,225,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(42,125,225,.08) 1px,transparent 1px);background-size:26px 26px}
+.mappin{position:relative;z-index:2;text-align:center;font-family:'Raleway',sans-serif;font-weight:500;font-size:.84rem;color:var(--blue)}
+
+/* NAV DROPDOWN */
+.nav-dropdown{position:relative}
+.nav-drop-trigger{display:flex;align-items:center;gap:.3rem;cursor:pointer}
+.nav-drop-menu{display:none;position:absolute;top:calc(100% + 4px);left:0;background:#000;border:1px solid #222;border-radius:var(--r);min-width:220px;box-shadow:0 16px 40px rgba(0,0,0,.7);z-index:300;padding:.5rem 0;overflow:hidden}
+.nav-drop-menu.open{display:block}
+.nav-drop-menu a{display:flex;align-items:center;gap:.7rem;padding:.65rem 1.2rem;font-family:'Montserrat',sans-serif;font-size:.88rem;font-weight:500;color:#c0c8d8;cursor:pointer;transition:background .12s,color .12s;text-decoration:none}
+.nav-drop-menu a:hover{background:rgba(42,125,225,.15);color:#fff}
+.nav-drop-divider{height:1px;background:#1e2a3a;margin:.4rem 0}
+
+/* EQUIPMENT CATEGORY PAGES */
+.eq-hero{background:linear-gradient(135deg,#0a0e17,#0f2a5e 60%,var(--blue));padding:4rem 2rem 3rem;color:#fff;text-align:center}
+.eq-hero h1{font-family:'Montserrat',sans-serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:600;margin-bottom:.6rem}
+.eq-hero p{font-size:1rem;color:rgba(255,255,255,.75);max-width:50ch;margin:0 auto 1.5rem}
+.eq-breadcrumb{font-family:'Raleway',sans-serif;font-size:.82rem;color:rgba(255,255,255,.5);margin-bottom:1rem}
+.eq-breadcrumb span{color:rgba(255,255,255,.85);cursor:pointer}
+.eq-breadcrumb span:hover{color:#fff;text-decoration:underline}
+.eq-body{max-width:1200px;margin:0 auto;padding:3rem 2rem}
+.eq-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2rem}
+.eq-card{background:#131c2e;border:1.5px solid #1e2a3a;border-radius:var(--rl);overflow:hidden;transition:box-shadow .2s,transform .2s,border-color .2s;cursor:pointer}
+.eq-card:hover{box-shadow:var(--lg);transform:translateY(-4px);border-color:var(--blue)}
+.eq-img{height:160px;display:flex;align-items:center;justify-content:center;font-size:3.5rem;background:#0d1520}
+.eq-body-card{padding:1.2rem 1.3rem 1.5rem}
+.eq-brand{font-size:.67rem;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--blue);margin-bottom:.18rem;font-family:'Raleway',sans-serif}
+.eq-name{font-family:'Raleway',sans-serif;font-weight:600;font-size:.97rem;color:#fff;margin-bottom:.4rem;line-height:1.3}
+.eq-desc{font-size:.82rem;color:#8a96aa;line-height:1.55;margin-bottom:.9rem}
+.eq-price{font-family:'Raleway',sans-serif;font-weight:600;font-size:1.1rem;color:#fff;margin-bottom:.75rem}
+.eq-price small{font-size:.68rem;font-weight:400;color:#8a96aa}
+.eq-acts{display:flex;gap:.5rem}
+.eq-back{display:inline-flex;align-items:center;gap:.5rem;font-family:'Raleway',sans-serif;font-size:.85rem;font-weight:500;color:var(--blue);cursor:pointer;margin-bottom:1.5rem;transition:gap .15s}
+.eq-back:hover{gap:.8rem}
+.eq-filter-bar{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:2rem}
+.eq-ftag{font-family:'Raleway',sans-serif;font-size:.82rem;font-weight:500;padding:.35rem .9rem;border:1.5px solid #2d3a4e;border-radius:20px;background:transparent;color:#8a96aa;cursor:pointer;transition:all .15s}
+.eq-ftag.active,.eq-ftag:hover{background:var(--blue);border-color:var(--blue);color:#fff}
+
+/* RESPONSIVE */
+@media(max-width:1024px){.pgrid{grid-template-columns:repeat(3,1fr)}.sgrid{grid-template-columns:repeat(2,1fr)}.eq-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:900px){
+  .topbar,.nl{display:none}
+  nav{padding:0 1.5rem}
+  .hi,.wgrid{grid-template-columns:1fr}
+  .hv{display:none}
+  .cg,.tgrid{grid-template-columns:1fr 1fr}
+  .hsteps{grid-template-columns:1fr 1fr;gap:1.5rem}
+  .pgrid,.sgrid{grid-template-columns:1fr 1fr}
+  .fm{grid-template-columns:1fr 1fr}
+  .slayout{grid-template-columns:1fr;padding:2rem 1.5rem}.sidebar{position:static}
+  .rintro{grid-template-columns:1fr;gap:2.5rem;padding:3rem 1.5rem}.rvis{height:200px}
+  .pricgrid,.faqgrid{grid-template-columns:1fr}
+  .clayout{grid-template-columns:1fr;padding:3rem 1.5rem}.fgrow{grid-template-columns:1fr}
+  .sp,.pricsec,.faqsec{padding:3.5rem 1.5rem}
+}
+@media(max-width:600px){.cg,.tgrid,.pgrid,.sgrid,.hsteps{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo" onclick="showPage('home')"><img src="mountain-dark.jpeg" alt="RidgeView Event Technology" style="height:42px;width:auto;display:block"></div>
+  <ul class="nl">
+    <li><a onclick="showPage('home')" data-page="home" class="active">Home</a></li>
+    <li><a onclick="showPage('services')" data-page="services">Services</a></li>
+    <li><a onclick="showPage('about')" data-page="about">About Us</a></li>
+    <li><a onclick="showPage('contact')" data-page="contact">Contact</a></li>
+  </ul>
+  <div class="na">
+    <button class="bnp" onclick="showPage('contact')">Get a Quote</button>
+  </div>
+</nav>
+
+<!-- ════ HOME ════ -->
+<div id="page-home" class="page active">
+  <div class="hero">
+    <video class="hero-video" autoplay muted loop playsinline poster="">
+      <source src="hero-video.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="hi">
+      <div>
+        <div class="htag">Nationwide AV Equipment Specialists</div>
+       <h1>AV & Event Technology for Conferences, Meetings & Corporate Events</h1>
+<p class="hsub">
+Reliable production and modern event technology for conferences, meetings, and high-impact corporate experiences.
+<p class="hcred">
+15+ years of experience supporting corporate and live events.
+</p>        
+<div class="hbtns">
+          <button class="bhw" onclick="showPage('contact')">Get a Free Quote</button>
+          <button class="bhg" onclick="showPage('about')">Learn About Our Services</button>
+        </div>
+        <div class="htrust">
+          <span>Same-day availability</span><span>1,200+ items in stock</span><span>15+ years experience</span><span>Free delivery over $500</span>
+        </div>
+      </div>
+      <div class="hv">
+        <div class="hvc wide"><div class="hvi">🎚️</div><div><div class="hvn">Allen &amp; Heath SQ-6 Digital Mixer</div><div class="hvp">From $185/day or buy at $4,299</div><div class="hvb">✓ In Stock</div></div></div>
+        <div class="hvc"><div class="hvi">🔊</div><div class="hvn">Line Array PA Systems</div><div class="hvp">From $120/day per box</div><div class="hvb">✓ Available</div></div>
+        <div class="hvc"><div class="hvi">💡</div><div class="hvn">Moving Head Lighting</div><div class="hvp">From $75/day each</div><div class="hvb">12 Units Ready</div></div>
+        <div class="hvc"><div class="hvi">📺</div><div class="hvn">Laser Projectors &amp; LED Walls</div><div class="hvp">From $450/day</div><div class="hvb">✓ Available</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ts"><div class="tsi">
+    <div class="ti">🚚 Free delivery over $500</div><div class="tdiv"></div>
+    <div class="ti">📞 24hr event support</div><div class="tdiv"></div>
+    <div class="ti">⚡ Same-day rentals available</div><div class="tdiv"></div>
+    <div class="ti">🛡️ Damage waiver program</div><div class="tdiv"></div>
+    <div class="ti">⭐ 500+ events served</div>
+  </div></div>
+
+  <section class="sp"><div class="con">
+    <div class="stag">Equipment Categories</div>
+    <h2 class="st">Everything You Need for Your Event</h2>
+    <p class="sd">From intimate corporate gatherings to stadium-scale productions, we stock professional-grade gear across every category.</p>
+    <div class="cg reveal">
+      <a class="cc" onclick="showPage('eq-speakers')"><div class="cimg ca">🔊</div><div class="cbody"><div class="cname">Audio Systems</div><div class="cdesc">PA systems, mixers, microphones, monitors, and signal processors for any venue size.</div><div class="clink">Shop Audio</div></div></a>
+      <a class="cc" onclick="showPage('equipment')"><div class="cimg cl">💡</div><div class="cbody"><div class="cname">Lighting &amp; FX</div><div class="cdesc">Moving heads, LED washes, haze machines, followspots, and DMX controllers.</div><div class="clink">Shop Lighting</div></div></a>
+      <a class="cc" onclick="showPage('eq-projectors')"><div class="cimg cv">📺</div><div class="cbody"><div class="cname">Video &amp; Projection</div><div class="cdesc">LED walls, laser projectors, screens, video switchers, and broadcast cameras.</div><div class="clink">Shop Video</div></div></a>
+      <a class="cc" onclick="showPage('eq-microphones')"><div class="cimg cw">🎙️</div><div class="cbody"><div class="cname">Wireless &amp; RF</div><div class="cdesc">Handheld and lavalier wireless systems, IEM monitoring, and intercom solutions.</div><div class="clink">Shop Wireless</div></div></a>
+      <a class="cc" onclick="showPage('equipment')"><div class="cimg cp">🔌</div><div class="cbody"><div class="cname">Power &amp; Distribution</div><div class="cdesc">Distro boxes, UPS systems, generator tie-in, and power management for any load.</div><div class="clink">Shop Power</div></div></a>
+      <a class="cc" onclick="showPage('equipment')"><div class="cimg cs">🏗️</div><div class="cbody"><div class="cname">Staging &amp; Rigging</div><div class="cdesc">Modular platforms, trussing, chain motors, barriers, and crowd control solutions.</div><div class="clink">Shop Staging</div></div></a>
+    </div>
+  </div></section>
+
+  <section class="sp how-bg"><div class="con">
+    <div style="text-align:center;margin-bottom:3rem">
+      <div class="stag">Simple Process</div>
+      <h2 class="st">Renting AV Equipment is Easy</h2>
+      <p class="sd" style="margin:0 auto">We've streamlined the process so you can focus on your event — not the logistics.</p>
+    </div>
+    <div class="hsteps reveal">
+      <div class="hstep"><div class="hsnum">1</div><div class="hstitle">Browse &amp; Build Your List</div><p class="hsdesc">Filter our catalog by category, brand, or event type. Add items to your quote online.</p></div>
+      <div class="hstep"><div class="hsnum">2</div><div class="hstitle">Get a Quote</div><p class="hsdesc">Our team confirms availability and sends pricing within 2 hours of your request.</p></div>
+      <div class="hstep"><div class="hsnum">3</div><div class="hstitle">Delivery or Pickup</div><p class="hsdesc">Choose pickup or door-to-venue delivery. All gear is tested, labeled, and packed.</p></div>
+      <div class="hstep"><div class="hsnum">4</div><div class="hstitle">Return After Your Event</div><p class="hsdesc">Drop off or schedule a pickup. We handle inspection and prep for the next event.</p></div>
+    </div>
+  </div></section>
+
+  <section class="sp"><div class="con">
+    <div class="stag">Featured Inventory</div>
+    <h2 class="st">Popular Equipment</h2>
+    <p class="sd">Our most-rented and best-selling AV gear — all in stock and ready to ship.</p>
+    <div class="ptabs">
+      <button class="ptab active">All</button><button class="ptab">Audio</button><button class="ptab">Lighting</button><button class="ptab">Video</button><button class="ptab">Wireless</button>
+    </div>
+    <div class="pgrid reveal">
+      <div class="pcard"><div class="pimg">🎛️<div class="pbadge pbbr">Buy + Rent</div></div><div class="pbody"><div class="pbrand">Allen &amp; Heath</div><div class="pname">SQ-6 48-Ch Digital Mixer</div><div class="pprice">$4,299 <small>or $185/day</small></div><div class="pacts"><button class="pab pabp">Add to Cart</button><button class="pab pabo">Rent</button></div></div></div>
+      <div class="pcard"><div class="pimg">💡<div class="pbadge pbr">Rent</div></div><div class="pbody"><div class="pbrand">Chauvet Professional</div><div class="pname">Rogue R2X Wash Moving Head</div><div class="pprice">$75<small>/day</small></div><div class="pacts"><button class="pab pabp">Reserve</button><button class="pab pabo">Details</button></div></div></div>
+      <div class="pcard"><div class="pimg">🔊<div class="pbadge pbr">Rent</div></div><div class="pbody"><div class="pbrand">d&amp;b Audiotechnik</div><div class="pname">Y10P Line Array Element</div><div class="pprice">$120<small>/day per box</small></div><div class="pacts"><button class="pab pabp">Reserve</button><button class="pab pabo">Details</button></div></div></div>
+      <div class="pcard"><div class="pimg">📡<div class="pbadge pbb">Buy</div></div><div class="pbody"><div class="pbrand">Shure</div><div class="pname">Axient Digital ADX5D Receiver</div><div class="pprice">$2,149</div><div class="pacts"><button class="pab pabp">Add to Cart</button><button class="pab pabo">Details</button></div></div></div>
+    </div>
+    <div style="text-align:center;margin-top:2.5rem"><button class="bb" onclick="showPage('equipment')">View All Equipment →</button></div>
+  </div></section>
+
+  <section class="sp testsec"><div class="con">
+    <div style="text-align:center;margin-bottom:3rem">
+      <div class="stag" style="background:rgba(255,255,255,.15);color:rgba(255,255,255,.9)">Client Reviews</div>
+      <h2 class="st" style="color:#fff">Trusted by Event Professionals</h2>
+      <p class="sd" style="margin:0 auto;color:rgba(255,255,255,.65)">Don't take our word for it — here's what clients say after their events.</p>
+    </div>
+    <div class="tgrid reveal">
+      <div class="tcard"><div class="tstars">★★★★★</div><p class="ttext">"RidgeView had the exact rig we needed, delivered on time and in perfect condition. The team was incredibly responsive throughout the entire process."</p><div class="tauth"><div class="tav">JM</div><div><div class="tname">Jordan Miles</div><div class="trole">Production Manager — Summerfest Regional</div></div></div></div>
+      <div class="tcard"><div class="tstars">★★★★★</div><p class="ttext">"We've rented from RidgeView for three consecutive years. The gear is always top quality and their support line saved us during a last-minute technical issue."</p><div class="tauth"><div class="tav">SA</div><div><div class="tname">Sarah Alvarez</div><div class="trole">Event Director — TechCon Conference</div></div></div></div>
+      <div class="tcard"><div class="tstars">★★★★★</div><p class="ttext">"I needed 20 moving lights on two days' notice. RidgeView made it happen without breaking a sweat. Best AV rental experience in 12 years of production."</p><div class="tauth"><div class="tav">DK</div><div><div class="tname">Derek Kowalski</div><div class="trole">Lighting Director — Nationwide Tours</div></div></div></div>
+    </div>
+  </div></section>
+
+  <section class="sp"><div class="con">
+    <div class="wgrid reveal">
+      <div>
+        <div class="stag">Why RidgeView Event Technology</div>
+        <h2 class="st">Your Trusted AV & Event Technology Partner</h2>
+        <p class="sd">We're a team of event production veterans. We design, manage, and execute complete AV and event technology solutions for corporate events.</p>
+        <ul class="wfeats">
+          <li class="wf"><div class="wficon">⚡</div><div><div class="wftitle">Strategic Technical Planning</div><div class="wfdesc">We design complete AV and event technology solutions tailored to your corporate objectives and venue requirements.</div></div></li>
+          <li class="wf"><div class="wficon">🔧</div><div><div class="wftitle">Expert On-Site Execution</div><div class="wfdesc">Every element is tested, coordinated, and managed by experienced AV professionals during your event.</div></div></li>
+          <li class="wf"><div class="wficon">📞</div><div><div class="wftitle">Live Technical Support</div><div class="wfdesc">Our team provides real-time support throughout your entire event, anytime you need us.</div></div></li>
+          <li class="wf"><div class="wficon">💰</div><div><div class="wftitle">Transparent Proposals</div><div class="wfdesc">Clear pricing, no surprises. Your proposal outlines complete scope, timeline, and investment.</div></div></li>
+        </ul>
+      </div>
+      <div class="wvis">
+        <div class="wstat"><div class="wsnum">500+</div><div class="wslabel">Corporate events</div></div>
+        <div class="wstat"><div class="wsnum">100+</div><div class="wslabel">Enterprise clients</div></div>
+        <div class="wstat"><div class="wsnum">20+ yrs</div><div class="wslabel">AV leadership</div></div>
+        <div class="wstat"><div class="wsnum">4.9 ★</div><div class="wslabel">Client satisfaction</div></div>
+      </div>
+    </div>
+  </div></section>
+
+  <div class="ctaband">
+    <h2>Ready to Start Planning Your Event?</h2>
+    <p>Tell us about your event and we'll build a complete equipment list with availability and pricing — usually within two hours.</p>
+    <div class="ctabtns"><button class="bcw" onclick="showPage('contact')">Get a Free Quote</button><button class="bcg" onclick="showPage('about')">See Our Services</button></div>
+  </div>
+
+  <footer><div class="fb"><span>© 2026 RidgeView Event Technology</span><span>Privacy · Terms</span></div></footer>
+</div>
+
+<!-- ════ EQUIPMENT ════ -->
+<div id="page-equipment" class="page">
+  <div class="phero"><h1>AV Equipment — Buy &amp; Rent</h1><p>Browse our full catalog of 1,200+ professional items. Filter by category, brand, or availability.</p></div>
+  <div class="slayout">
+    <aside class="sidebar">
+      <div class="sbox"><h4>Category</h4>
+        <div class="ck"><input type="checkbox" id="c1" checked><label for="c1">Audio Systems</label></div>
+        <div class="ck"><input type="checkbox" id="c2" checked><label for="c2">Lighting &amp; FX</label></div>
+        <div class="ck"><input type="checkbox" id="c3" checked><label for="c3">Video &amp; Projection</label></div>
+        <div class="ck"><input type="checkbox" id="c4" checked><label for="c4">Wireless &amp; RF</label></div>
+        <div class="ck"><input type="checkbox" id="c5" checked><label for="c5">Power &amp; Distribution</label></div>
+        <div class="ck"><input type="checkbox" id="c6" checked><label for="c6">Staging &amp; Rigging</label></div>
+      </div>
+      <div class="sbox"><h4>Availability</h4>
+        <div class="ck"><input type="checkbox" id="a1" checked><label for="a1">Buy</label></div>
+        <div class="ck"><input type="checkbox" id="a2" checked><label for="a2">Rent</label></div>
+        <div class="ck"><input type="checkbox" id="a3" checked><label for="a3">Buy + Rent</label></div>
+      </div>
+      <div class="sbox"><h4>Brand</h4>
+        <div class="ck"><input type="checkbox" id="b1"><label for="b1">Allen &amp; Heath</label></div>
+        <div class="ck"><input type="checkbox" id="b2"><label for="b2">Chauvet</label></div>
+        <div class="ck"><input type="checkbox" id="b3"><label for="b3">Shure</label></div>
+        <div class="ck"><input type="checkbox" id="b4"><label for="b4">Sennheiser</label></div>
+        <div class="ck"><input type="checkbox" id="b5"><label for="b5">d&amp;b Audiotechnik</label></div>
+        <div class="ck"><input type="checkbox" id="b6"><label for="b6">Barco</label></div>
+      </div>
+      <div class="sbox"><h4>Max Price</h4><input type="range" class="rinput" min="0" max="25000" value="25000"><div class="rrow"><span>$0</span><span>$25,000</span></div></div>
+    </aside>
+    <div>
+      <div class="shophead">
+        <span class="shopcount">Showing 12 of 1,200+ items</span>
+        <div style="display:flex;gap:.75rem;align-items:center;flex-wrap:wrap">
+          <div class="ptabs" style="margin:0"><button class="ptab active">All</button><button class="ptab">Buy</button><button class="ptab">Rent</button><button class="ptab">New</button></div>
+          <select class="shopsort"><option>Featured</option><option>Price: Low to High</option><option>Price: High to Low</option></select>
+        </div>
+      </div>
+      <div class="sgrid">
+        <div class="pcard"><div class="pimg">🎛️<div class="pbadge pbbr">Buy + Rent</div></div><div class="pbody"><div class="pbrand">Allen &amp; Heath</div><div class="pname">SQ-6 48-Ch Digital Mixer</div><div class="pprice">$4,299 <small>or $185/day</small></div><div class="pacts"><button class="pab pabp">Add to Cart</button><button class="pab pabo">Rent</button></div></div></div>
+        <div class="pcard"><div class="pimg">💡<div class="pbadge pbr">Rent</div></div><div class="pbody"><div class="pbrand">Chauvet Professional</div><div class="pname">Rogue R2X Wash Moving Head</div><div class="pprice">$75<small>/day</small></div><div class="pacts"><button class="pab pabp">Reserve</button><button class="pab pabo">Details</button></div></div></div>
+        <div class="pcard"><div class="pimg">🔊<div class="pbadge pbr">Rent</div></div><div class="pbody"><div class="pbrand">d&amp;b Audiotechnik</div><div class="pname">Y10P Line Array Element</div><div class="pprice">$120<small>/day per box</small></div><div class="pacts"><button class="pab pabp">Reserve</button><button class="pab pabo">Details</button></div></div></div>
+        <div class="pcard"><div class="pimg">📡<div class="pbadge pbb">Buy</div></div><div class="pbody"><div class="pbrand">Shure</div><div class="pname">Axient Digital ADX5D Receiver</div><div class="pprice">$2,149</div><div class="pacts"><button class="pab pabp">Add to Cart</button><button class="pab pabo">Details</button></div></div></div>
+        <div class="pcard"><div class="pimg">📺<div class="pbadge pbbr">Buy + Rent</div></div><div class="pbody"><div class="pbrand">Barco</div><div class="pname">UDX-4K32 Laser Projector</div><div class="pprice">$22,500 <small>or $450/day</small></div><div class="pacts"><button class="pab pabp">Add to Cart</button><button class="pab pabo">Rent</button></div></div></div>
+        <div class="pcard"><div class="pimg">🎙️<div class="pbadge pbb">Buy</div></div><div class="pbody"><div class="pbrand">Sennheiser</div><div class="pname">EW-DX EM 4 DANTE Receiver</div><div class="pprice">$1,875</div><div class="pacts"><button class="pab pabp">Add to Cart</button><button class="pab pabo">Details</button></div></div></div>
+        <div class="pcard"><div class="pimg">🌫️<div class="pbadge pbr">Rent</div></div><div class="pbody"><div class="pbrand">Jem</div><div class="pname">ZR44 High-Impact Hazer</div><div class="pprice">$65<small>/day</small></div><div class="pacts"><button class="pab pabp">Reserve</button><button class="pab pabo">Details</button></div></div></div>
+        <div class="pcard"><div class="pimg">🖥️<div class="pbadge pbbr">Buy + Rent</div></div><div class="pbody"><div class="pbrand">Analog Way</div><div class="pname">Aquilon RS4 Video Processor</div><div class="pprice">$18,000 <small>or $380/day</small></div><div class="pacts"><button class="pab pabp">Add to Cart</button><button class="pab pabo">Rent</button></div></div></div>
+        <div class="pcard"><div class="pimg">🎤<div class="pbadge pbb">Buy</div></div><div class="pbody"><div class="pbrand">DPA Microphones</div><div class="pname">4006A Omnidirectional Mic</div><div class="pprice">$949</div><div class="pacts"><button class="pab pabp">Add to Cart</button><button class="pab pabo">Details</button></div></div></div>
+        <div class="pcard"><div class="pimg">⚡<div class="pbadge pbr">Rent</div></div><div class="pbody"><div class="pbrand">Lex Products</div><div class="pname">Portable Power Distro 200A</div><div class="pprice">$95<small>/day</small></div><div class="pacts"><button class="pab pabp">Reserve</button><button class="pab pabo">Details</button></div></div></div>
+        <div class="pcard"><div class="pimg">🎸<div class="pbadge pbbr">Buy + Rent</div></div><div class="pbody"><div class="pbrand">QSC</div><div class="pname">K12.2 Active 2000W Speaker</div><div class="pprice">$799 <small>or $45/day</small></div><div class="pacts"><button class="pab pabp">Add to Cart</button><button class="pab pabo">Rent</button></div></div></div>
+        <div class="pcard"><div class="pimg">🏗️<div class="pbadge pbr">Rent</div></div><div class="pbody"><div class="pbrand">Global Truss</div><div class="pname">F34 Square Truss Section 3m</div><div class="pprice">$35<small>/day per section</small></div><div class="pacts"><button class="pab pabp">Reserve</button><button class="pab pabo">Details</button></div></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="ctaband"><h2>Need Help Choosing the Right Gear?</h2><p>Our team can build a complete equipment package based on your venue, event type, and budget.</p><div class="ctabtns"><button class="bcw" onclick="showPage('contact')">Talk to an Expert</button></div></div>
+  <footer><div class="fb"><span>© 2026 RidgeView Event Technology</span><span>Privacy · Terms</span></div></footer>
+</div>
+
+<!-- ════ SERVICES ════ -->
+<div id="page-services" class="page">
+  <!-- What We Do / Production Management Section -->
+  <div class="sp" style="padding-bottom:0">
+    <div class="con">
+      <div class="stag">Services</div>
+      <h2 class="st">Complete Production Management</h2>
+      <p style="font-size:1.08rem;color:#8a96aa;line-height:1.8;max-width:700px;margin-bottom:0">We manage your entire technical production: system design, architectural visualization, cross-functional coordination, equipment procurement and deployment, on-site technical direction, and post-event support. Audio system design and operation. Video content strategy and projection. Intelligent lighting design. Staging and infrastructure. LED signage and branding. Live streaming. Virtual integration. Every element coordinated by experienced AV professionals who understand corporate events and their technical demands.</p>
+    </div>
+  </div>
+
+  <!-- Process Section -->
+  <div class="sp" style="padding-top:0;padding-bottom:0">
+    <div class="con">
+      <div class="process-hero" style="padding:0 0 2.5rem 0;max-width:unset;text-align:left">
+        <h1 class="process-title" style="text-align:left">Process</h1>
+        <p class="process-intro" style="text-align:left">RidgeView provides end-to-end planning and execution for AV and event technology across corporate events.</p>
+      </div>
+      <div class="process-steps-wrap" style="padding-bottom:0">
+        <div class="process-step">
+          <span class="process-number">01</span>
+          <div>
+            <h2 class="process-step-title">Initial Consultation</h2>
+            <p class="process-step-text">Define technical requirements, audience needs, and event objectives. Establish project scope, timeline, and key deliverables.</p>
+          </div>
+        </div>
+        <div class="process-step">
+          <span class="process-number">02</span>
+          <div>
+            <h2 class="process-step-title">Site Visit & Technical Assessment</h2>
+            <p class="process-step-text">Evaluate venue infrastructure, power, rigging, and acoustics. Identify logistical constraints and integration points.</p>
+          </div>
+        </div>
+        <div class="process-step">
+          <span class="process-number">03</span>
+          <div>
+            <h2 class="process-step-title">Scope of Work & Quote</h2>
+            <p class="process-step-text">Document all system requirements, labor, and deliverables. Provide a detailed, transparent quote for approval.</p>
+          </div>
+        </div>
+        <div class="process-step">
+          <span class="process-number">04</span>
+          <div>
+            <h2 class="process-step-title">Pre-Production Planning</h2>
+            <p class="process-step-text">Develop run of show, technical workflows, and schedules. Coordinate with all stakeholders and vendors.</p>
+          </div>
+        </div>
+        <div class="process-step">
+          <span class="process-number">05</span>
+          <div>
+            <h2 class="process-step-title">System Design & Coordination</h2>
+            <p class="process-step-text">Engineer audio, video, and signal routing systems. Finalize equipment lists and integration plans.</p>
+          </div>
+        </div>
+        <div class="process-step">
+          <span class="process-number">06</span>
+          <div>
+            <h2 class="process-step-title">On-Site Execution</h2>
+            <p class="process-step-text">Install, test, and operate all systems. Provide real-time technical management and troubleshooting.</p>
+          </div>
+        </div>
+        <div class="process-step">
+          <span class="process-number">07</span>
+          <div>
+            <h2 class="process-step-title">Wrap & Post-Event Reporting</h2>
+            <p class="process-step-text">Remove all equipment, document outcomes, and deliver post-event analysis with recommendations.</p>
+          </div>
+        </div>
+      </div>
+      <div class="process-closing" style="text-align:left">Every engagement is structured, documented, and executed with precision to ensure consistent results across every event.</div>
+    </div>
+  </div>
+</div>
+
+<!-- Capabilities Section (Services Page) -->
+<div class="sp" style="padding-top:0">
+  <div class="con">
+    <div class="stag">Capabilities</div>
+    <h2 class="st">Technical Capabilities</h2>
+    <div class="capabilities-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:2.5rem 3.5rem;max-width:900px;margin:0 auto 2.5rem auto">
+      <div>
+        <div style="font-weight:700;font-family:'Montserrat',sans-serif;color:#fff;margin-bottom:.4rem">Audio System Design & Engineering</div>
+        <div style="color:#8a96aa;font-size:.98rem;line-height:1.7">Line arrays, distributed audio, digital mixing, wireless coordination, and DSP for any venue size.</div>
+      </div>
+      <div>
+        <div style="font-weight:700;font-family:'Montserrat',sans-serif;color:#fff;margin-bottom:.4rem">Video & Projection Systems</div>
+        <div style="color:#8a96aa;font-size:.98rem;line-height:1.7">LED walls, laser projectors, multi-screen switching, IMAG, and live streaming integration.</div>
+      </div>
+      <div>
+        <div style="font-weight:700;font-family:'Montserrat',sans-serif;color:#fff;margin-bottom:.4rem">Lighting Design & Control</div>
+        <div style="color:#8a96aa;font-size:.98rem;line-height:1.7">Intelligent lighting, DMX programming, architectural and scenic lighting for stage and branding.</div>
+      </div>
+      <div>
+        <div style="font-weight:700;font-family:'Montserrat',sans-serif;color:#fff;margin-bottom:.4rem">Staging, Rigging & Power</div>
+        <div style="color:#8a96aa;font-size:.98rem;line-height:1.7">Modular staging, truss, chain motors, power distribution, and show-critical infrastructure.</div>
+      </div>
+      <div>
+        <div style="font-weight:700;font-family:'Montserrat',sans-serif;color:#fff;margin-bottom:.4rem">Show Control & Signal Routing</div>
+        <div style="color:#8a96aa;font-size:.98rem;line-height:1.7">Redundant signal paths, show control, timecode, and networked AV for seamless operation.</div>
+      </div>
+      <div>
+        <div style="font-weight:700;font-family:'Montserrat',sans-serif;color:#fff;margin-bottom:.4rem">Event Networking & Communications</div>
+        <div style="color:#8a96aa;font-size:.98rem;line-height:1.7">Wired/wireless comms, intercom, event WiFi, and secure network infrastructure for production.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ ABOUT ════ -->
+<div id="page-about" class="page">
+  <div class="phero"><img src="ridgeview-logo-dark.png" alt="RidgeView Event Technology" style="height:160px;width:auto;display:block;margin:0"></div>
+
+  <!-- Leadership Header -->
+  <div style="background:#0d1520;padding:4rem 2rem 0;text-align:center">
+    <div style="max-width:1200px;margin:0 auto">
+      <div class="stag">Leadership</div>
+      <h2 class="st" style="margin-bottom:.5rem">Led by Proven Technical Expertise</h2>
+      <p style="font-size:1.03rem;color:#8a96aa;max-width:60ch;margin:0 auto;line-height:1.75">With over two decades of hands-on experience in live event production, our leadership has delivered hundreds of corporate events nationwide.</p>
+    </div>
+  </div>
+
+  <!-- Leadership Section -->
+  <div class="about-founders">
+    <div class="founders-grid">
+      <!-- Johnny Ridgill -->
+      <div class="founder-card">
+        <div class="founder-av">JR</div>
+        <div>
+          <div class="founder-name">Johnny Ridgill</div>
+          <div class="founder-role">Co-Founder & Technical Director</div>
+          <div class="founder-bio">Johnny brings over 20 years of experience in live event production, AV system design, and technical direction for high-profile corporate events nationwide. He leads RidgeView’s technical strategy, ensuring every project is executed with precision, safety, and innovation.</div>
+        </div>
+      </div>
+      <!-- Tiffany Ridgill -->
+      <div class="founder-card">
+        <div class="founder-av">TR</div>
+        <div>
+          <div class="founder-name">Tiffany Ridgill</div>
+          <div class="founder-role">Co-Founder & Director of Client Experience</div>
+          <div class="founder-bio">Tiffany oversees client relationships, project management, and event logistics. With a background in corporate hospitality and event planning, she ensures every RidgeView client receives responsive service and a seamless event experience from start to finish.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Capabilities Section (restored) -->
+  <div class="sp" style="padding-top:0">
+    <div class="con">
+      <div class="stag">Capabilities</div>
+      <h2 class="st">Technical Capabilities</h2>
+      <div class="capabilities-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:2.5rem 3.5rem;max-width:900px;margin:0 auto 2.5rem auto">
+        <div>
+          <div style="font-weight:700;font-family:'Montserrat',sans-serif;color:#fff;margin-bottom:.4rem">Audio System Design & Engineering</div>
+          <div style="color:#8a96aa;font-size:.98rem;line-height:1.7">Line arrays, distributed audio, digital mixing, wireless coordination, and DSP for any venue size.</div>
+        </div>
+        <div>
+          <div style="font-weight:700;font-family:'Montserrat',sans-serif;color:#fff;margin-bottom:.4rem">Video & Projection Systems</div>
+          <div style="color:#8a96aa;font-size:.98rem;line-height:1.7">LED walls, laser projectors, multi-screen switching, IMAG, and live streaming integration.</div>
+        </div>
+        <div>
+          <div style="font-weight:700;font-family:'Montserrat',sans-serif;color:#fff;margin-bottom:.4rem">Lighting Design & Control</div>
+          <div style="color:#8a96aa;font-size:.98rem;line-height:1.7">Intelligent lighting, DMX programming, architectural and scenic lighting for stage and branding.</div>
+        </div>
+        <div>
+          <div style="font-weight:700;font-family:'Montserrat',sans-serif;color:#fff;margin-bottom:.4rem">Staging, Rigging & Power</div>
+          <div style="color:#8a96aa;font-size:.98rem;line-height:1.7">Modular staging, truss, chain motors, power distribution, and show-critical infrastructure.</div>
+        </div>
+        <div>
+          <div style="font-weight:700;font-family:'Montserrat',sans-serif;color:#fff;margin-bottom:.4rem">Show Control & Signal Routing</div>
+          <div style="color:#8a96aa;font-size:.98rem;line-height:1.7">Redundant signal paths, show control, timecode, and networked AV for seamless operation.</div>
+        </div>
+        <div>
+          <div style="font-weight:700;font-family:'Montserrat',sans-serif;color:#fff;margin-bottom:.4rem">Event Networking & Communications</div>
+          <div style="color:#8a96aa;font-size:.98rem;line-height:1.7">Wired/wireless comms, intercom, event WiFi, and secure network infrastructure for production.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA Band -->
+  <div class="ctaband"><h2>Plan Your Next Production</h2><p>Connect with our team to discuss technical execution and event strategy.</p><div class="ctabtns"><button class="bcw" onclick="showPage('contact')">Schedule a Consultation</button><button class="bcg" onclick="showPage('contact')">Request a Proposal</button></div></div>
+
+  <!-- RidgeView Values / Event Focus Section -->
+  <div class="about-purpose" style="text-align:center">
+    <div class="stag" style="background:rgba(255,255,255,.15);color:#fff;display:inline-block">Our Focus</div>
+    <h2 style="text-align:center">Delivering Flawless Corporate Events</h2>
+    <p style="text-align:center">RidgeView is dedicated to the success of every event. We combine technical expertise, disciplined project management, and a client-first approach to deliver seamless experiences for enterprise, corporate, and nonprofit clients. Our team takes ownership of every detail, ensuring your objectives are met with precision and reliability.</p>
+  </div>
+  <footer><div class="fb"><span>© 2026 RidgeView Event Technology</span><span>Privacy · Terms</span></div></footer>
+</div>
+
+<!-- ════ CONTACT ════ -->
+<div id="page-contact" class="page">
+  <div class="phero"><h1>Get a Free Quote</h1><p>Fill out the form and our team will respond with availability and pricing within 2 hours.</p></div>
+  <div class="clayout">
+    <div class="cformwrap">
+      <h3>Tell Us About Your Event</h3>
+      <p class="csub">We'll put together a complete equipment list and pricing for you.</p>
+      <div class="fgrow">
+        <div class="fg"><label>First Name</label><input type="text" placeholder="Jordan"></div>
+        <div class="fg"><label>Last Name</label><input type="text" placeholder="Miles"></div>
+      </div>
+      <div class="fg"><label>Email Address</label><input type="email" placeholder="you@company.com"></div>
+      <div class="fg"><label>Phone Number</label><input type="tel" placeholder="(555) 000-0000"></div>
+      <div class="fgrow">
+        <div class="fg"><label>Event Type</label><select><option>Concert / Festival</option><option>Corporate Event</option><option>Conference</option><option>Theatre Production</option><option>Trade Show</option><option>Other</option></select></div>
+        <div class="fg"><label>Event Date</label><input type="date"></div>
+      </div>
+      <div class="fgrow">
+        <div class="fg"><label>Est. Attendance</label><select><option>Under 100</option><option>100–500</option><option>500–1,000</option><option>1,000–5,000</option><option>5,000+</option></select></div>
+        <div class="fg"><label>Interested In</label><select><option>Rental Only</option><option>Purchase Only</option><option>Both</option></select></div>
+      </div>
+      <div class="fg"><label>Equipment Needed / Event Details</label><textarea placeholder="Describe your venue, the gear you need, and any special requirements..."></textarea></div>
+      <button class="bp" style="width:100%;padding:1rem;font-size:1.05rem" onclick="alert('Thank you! Our team will be in touch within 2 hours.')">Submit Quote Request →</button>
+    </div>
+    <div class="cinfobox">
+      <h3>Other Ways to Reach Us</h3>
+      <p class="csub" style="margin-bottom:0">Prefer to talk? Our team is available 7 days a week.</p>
+      <div class="cph">📞 (562) 321-1858</div>
+      <div class="ccard"><div class="ccicon">📍</div><div><div class="cctitle">Our Warehouse</div><div class="ccbody">4820 Industrial Pkwy, Suite 110<br>Your City, ST 00000<br><br>Mon–Fri: 7am–8pm · Sat–Sun: 8am–6pm</div></div></div>
+      <div class="ccard"><div class="ccicon">✉️</div><div><div class="cctitle">Email Us</div><div class="ccbody"><a href="mailto:ridgeviewtechnology1@gmail.com" style="color:var(--blue)">ridgeviewtechnology1@gmail.com</a></div></div></div>
+      <div class="ccard"><div class="ccicon">⚡</div><div><div class="cctitle">Same-Day Response</div><div class="ccbody">Submit your quote before noon and we'll respond the same day with a full equipment list and pricing.</div></div></div>
+      <div class="mapbox"><div class="mapgrid"></div><div class="mappin"><div style="font-size:2.4rem">📍</div>RidgeView Event Technology Warehouse</div></div>
+    </div>
+  </div>
+  <footer><div class="fm"><div><div class="fbl" onclick="showPage('home')"><img src="ridgeview-logo.png" alt="RidgeView Event Technology" style="height:44px;width:auto;display:block;margin-bottom:.5rem"></div><p class="ftag">Professional AV sales and rentals for live events of every scale.</p><div class="fph">📞 (562) 321-1858</div></div><div class="fc"><h4>Equipment</h4><ul><li><a onclick="showPage('equipment')">Audio Systems</a></li><li><a onclick="showPage('equipment')">Lighting &amp; FX</a></li><li><a onclick="showPage('equipment')">Video &amp; Projection</a></li></ul></div><div class="fc"><h4>Company</h4><ul><li><a onclick="showPage('about')">About Us</a></li><li><a onclick="showPage('rentals')">Rental Info</a></li><li><a>Careers</a></li></ul></div><div class="fc"><h4>Support</h4><ul><li><a onclick="showPage('contact')">Contact</a></li><li><a>FAQ</a></li><li><a>Tech Support</a></li></ul></div></div><div class="fb"><span>© 2026 RidgeView Event Technology.</span><span>Privacy · Terms</span></div></footer>
+</div>
+
+
+<!-- ════ SPEAKERS ════ -->
+<div id="page-eq-speakers" class="page">
+  <div class="eq-hero">
+    <div class="eq-breadcrumb"><span onclick="showPage('equipment')">Equipment</span> › Speakers</div>
+    <h1>🔊 Speakers</h1>
+    <p>Professional PA systems, line arrays, subwoofers, and portable speakers for any venue or event size.</p>
+  </div>
+  <div class="eq-body">
+    <div class="eq-back" onclick="showPage('equipment')">← Back to All Equipment</div>
+    <div class="eq-filter-bar">
+      <button class="eq-ftag active">All</button>
+      <button class="eq-ftag">Buy</button>
+      <button class="eq-ftag">Rent</button>
+      <button class="eq-ftag">Line Array</button>
+      <button class="eq-ftag">Subwoofers</button>
+      <button class="eq-ftag">Portable</button>
+    </div>
+    <div class="eq-grid reveal">
+      <div class="eq-card"><div class="eq-img">🔊</div><div class="eq-body-card"><div class="eq-brand">d&b Audiotechnik</div><div class="eq-name">Y10P Line Array Element</div><div class="eq-desc">High-output line array element ideal for medium to large venues. Exceptional pattern control and clarity.</div><div class="eq-price">$120<small>/day per box</small></div><div class="eq-acts"><button class="pab pabp">Reserve</button><button class="pab pabo">Details</button></div></div></div>
+      <div class="eq-card"><div class="eq-img">🔈</div><div class="eq-body-card"><div class="eq-brand">QSC</div><div class="eq-name">K12.2 Active 2000W Speaker</div><div class="eq-desc">Versatile 12" powered speaker with 2000W Class-D amplification. Perfect for small to mid-size events.</div><div class="eq-price">$799 <small>or $45/day</small></div><div class="eq-acts"><button class="pab pabp">Add to Cart</button><button class="pab pabo">Rent</button></div></div></div>
+      <div class="eq-card"><div class="eq-img">📢</div><div class="eq-body-card"><div class="eq-brand">JBL Professional</div><div class="eq-name">SRX835P Powered Speaker</div><div class="eq-desc">15" 3-way loudspeaker with 2000W power and integrated DSP for superior live sound performance.</div><div class="eq-price">$1,199 <small>or $55/day</small></div><div class="eq-acts"><button class="pab pabp">Add to Cart</button><button class="pab pabo">Rent</button></div></div></div>
+      <div class="eq-card"><div class="eq-img">🔉</div><div class="eq-body-card"><div class="eq-brand">d&b Audiotechnik</div><div class="eq-name">B22-Sub Cardioid Subwoofer</div><div class="eq-desc">Dual 18" subwoofer with cardioid mode for powerful, directional low-frequency reinforcement.</div><div class="eq-price">$95<small>/day</small></div><div class="eq-acts"><button class="pab pabp">Reserve</button><button class="pab pabo">Details</button></div></div></div>
+      <div class="eq-card"><div class="eq-img">🔊</div><div class="eq-body-card"><div class="eq-brand">Meyer Sound</div><div class="eq-name">LEOPARD Line Array</div><div class="eq-desc">Compact, wide-format line array element delivering Meyer Sound clarity for demanding live applications.</div><div class="eq-price">$150<small>/day per box</small></div><div class="eq-acts"><button class="pab pabp">Reserve</button><button class="pab pabo">Details</button></div></div></div>
+      <div class="eq-card"><div class="eq-img">📻</div><div class="eq-body-card"><div class="eq-brand">Bose</div><div class="eq-name">L1 Pro32 Portable PA</div><div class="eq-desc">Portable line array system for small events, weddings, and speeches. Easy setup in minutes.</div><div class="eq-price">$499 <small>or $35/day</small></div><div class="eq-acts"><button class="pab pabp">Add to Cart</button><button class="pab pabo">Rent</button></div></div></div>
+    </div>
+  </div>
+  <div class="ctaband"><h2>Need a Full Speaker Package?</h2><p>We'll build a complete PA system package tailored to your venue and event size.</p><div class="ctabtns"><button class="bcw" onclick="showPage('contact')">Get a Custom Quote</button><button class="bcg" onclick="showPage('equipment')">Browse All Equipment</button></div></div>
+  <footer><div class="fm"><div><div class="fbl" onclick="showPage('home')"><img src="ridgeview-logo.png" alt="RidgeView Event Technology" style="height:44px;width:auto;display:block;margin-bottom:.5rem"></div><p class="ftag">Professional AV sales and rentals for live events of every scale.</p><div class="fph">📞 (562) 321-1858</div></div><div class="fc"><h4>Equipment</h4><ul><li><a onclick="showPage('eq-speakers')">Speakers</a></li><li><a onclick="showPage('eq-mixers')">Mixers</a></li><li><a onclick="showPage('eq-microphones')">Microphones</a></li></ul></div><div class="fc"><h4>Company</h4><ul><li><a onclick="showPage('about')">About Us</a></li><li><a onclick="showPage('rentals')">Rental Info</a></li></ul></div><div class="fc"><h4>Support</h4><ul><li><a onclick="showPage('contact')">Contact</a></li><li><a>FAQ</a></li></ul></div></div><div class="fb"><span>© 2026 RidgeView Event Technology.</span><span>Privacy · Terms</span></div></footer>
+</div>
+
+<!-- ════ MIXERS ════ -->
+<div id="page-eq-mixers" class="page">
+  <div class="eq-hero">
+    <div class="eq-breadcrumb"><span onclick="showPage('equipment')">Equipment</span> › Mixers</div>
+    <h1>🎛️ Mixers</h1>
+    <p>Digital and analog mixing consoles for live sound, broadcast, studio, and corporate events.</p>
+  </div>
+  <div class="eq-body">
+    <div class="eq-back" onclick="showPage('equipment')">← Back to All Equipment</div>
+    <div class="eq-filter-bar">
+      <button class="eq-ftag active">All</button>
+      <button class="eq-ftag">Buy</button>
+      <button class="eq-ftag">Rent</button>
+      <button class="eq-ftag">Digital</button>
+      <button class="eq-ftag">Analog</button>
+      <button class="eq-ftag">Dante</button>
+    </div>
+    <div class="eq-grid reveal">
+      <div class="eq-card"><div class="eq-img">🎛️</div><div class="eq-body-card"><div class="eq-brand">Allen & Heath</div><div class="eq-name">SQ-6 48-Ch Digital Mixer</div><div class="eq-desc">96kHz digital mixing with 48 input channels, built-in FX, and full recall. Industry standard for live touring.</div><div class="eq-price">$4,299 <small>or $185/day</small></div><div class="eq-acts"><button class="pab pabp">Add to Cart</button><button class="pab pabo">Rent</button></div></div></div>
+      <div class="eq-card"><div class="eq-img">🎚️</div><div class="eq-body-card"><div class="eq-brand">Yamaha</div><div class="eq-name">CL5 Digital Mixing Console</div><div class="eq-desc">Professional 72-channel digital console with premium I/O, Dugan auto-mixing, and Dante networking.</div><div class="eq-price">$12,999 <small>or $350/day</small></div><div class="eq-acts"><button class="pab pabp">Add to Cart</button><button class="pab pabo">Rent</button></div></div></div>
+      <div class="eq-card"><div class="eq-img">🎛️</div><div class="eq-body-card"><div class="eq-brand">DiGiCo</div><div class="eq-name">SD12 Digital Console</div><div class="eq-desc">72-channel console with 36 faders, fully configurable I/O, and SuperAnalogue mic preamps.</div><div class="eq-price">$22,000 <small>or $420/day</small></div><div class="eq-acts"><button class="pab pabp">Add to Cart</button><button class="pab pabo">Rent</button></div></div></div>
+      <div class="eq-card"><div class="eq-img">🎚️</div><div class="eq-body-card"><div class="eq-brand">Allen & Heath</div><div class="eq-name">dLive S5000 Surface</div><div class="eq-desc">36-fader control surface for the dLive MixRack. Up to 128 channels with zero-latency processing.</div><div class="eq-price">$8,500 <small>or $280/day</small></div><div class="eq-acts"><button class="pab pabp">Add to Cart</button><button class="pab pabo">Rent</button></div></div></div>
+      <div class="eq-card"><div class="eq-img">🎛️</div><div class="eq-body-card"><div class="eq-brand">Behringer</div><div class="eq-name">X32 40-Input Digital Mixer</div><div class="eq-desc">40-input, 25-bus digital mixing console with motorized faders. Great for mid-size productions.</div><div class="eq-price">$1,999 <small>or $85/day</small></div><div class="eq-acts"><button class="pab pabp">Add to Cart</button><button class="pab pabo">Rent</button></div></div></div>
+      <div class="eq-card"><div class="eq-img">🎚️</div><div class="eq-body-card"><div class="eq-brand">Midas</div><div class="eq-name">PRO X Live Sound Console</div><div class="eq-desc">168-input channels, 99 mix buses with Midas' legendary mic preamps. Built for world-class touring.</div><div class="eq-price">$35,000 <small>or $550/day</small></div><div class="eq-acts"><button class="pab pabp">Add to Cart</button><button class="pab pabo">Rent</button></div></div></div>
+    </div>
+  </div>
+  <div class="ctaband"><h2>Not Sure Which Mixer You Need?</h2><p>Our engineers will match you with the right console based on your channel count and event requirements.</p><div class="ctabtns"><button class="bcw" onclick="showPage('contact')">Talk to an Engineer</button><button class="bcg" onclick="showPage('equipment')">Browse All Equipment</button></div></div>
+  <footer><div class="fm"><div><div class="fbl" onclick="showPage('home')"><img src="ridgeview-logo.png" alt="RidgeView Event Technology" style="height:44px;width:auto;display:block;margin-bottom:.5rem"></div><p class="ftag">Professional AV sales and rentals for live events of every scale.</p><div class="fph">📞 (562) 321-1858</div></div><div class="fc"><h4>Equipment</h4><ul><li><a onclick="showPage('eq-speakers')">Speakers</a></li><li><a onclick="showPage('eq-mixers')">Mixers</a></li><li><a onclick="showPage('eq-microphones')">Microphones</a></li></ul></div><div class="fc"><h4>Company</h4><ul><li><a onclick="showPage('about')">About Us</a></li><li><a onclick="showPage('rentals')">Rental Info</a></li></ul></div><div class="fc"><h4>Support</h4><ul><li><a onclick="showPage('contact')">Contact</a></li><li><a>FAQ</a></li></ul></div></div><div class="fb"><span>© 2026 RidgeView Event Technology.</span><span>Privacy · Terms</span></div></footer>
+</div>
+
+<!-- ════ TELEVISIONS ════ -->
+<div id="page-eq-televisions" class="page">
+  <div class="eq-hero">
+    <div class="eq-breadcrumb"><span onclick="showPage('equipment')">Equipment</span> › Televisions</div>
+    <h1>📺 Televisions</h1>
+    <p>Commercial-grade flat panel TVs for trade shows, corporate events, lobbies, and presentations.</p>
+  </div>
+  <div class="eq-body">
+    <div class="eq-back" onclick="showPage('equipment')">← Back to All Equipment</div>
+    <div class="eq-filter-bar">
+      <button class="eq-ftag active">All</button>
+      <button class="eq-ftag">Rent</button>
+      <button class="eq-ftag">Buy</button>
+      <button class="eq-ftag">4K</button>
+      <button class="eq-ftag">55"</button>
+      <button class="eq-ftag">75"+</button>
+    </div>
+    <div class="eq-grid reveal">
+      <div class="eq-card"><div class="eq-img">📺</div><div class="eq-body-card"><div class="eq-brand">Samsung</div><div class="eq-name">55" 4K Commercial Display</div><div class="eq-desc">Commercial-grade 55" 4K display with 24/7 operation rating. Ideal for signage and presentations.</div><div class="eq-price">$65<small>/day</small></div><div class="eq-acts"><button class="pab pabp">Reserve</button><button class="pab pabo">Details</button></div></div></div>
+      <div class="eq-card"><div class="eq-img">🖥️</div><div class="eq-body-card"><div class="eq-brand">LG</div><div class="eq-name">75" 4K UHD Smart Display</div><div class="eq-desc">Ultra-bright 75" commercial TV with 4K resolution. Perfect for large conference rooms and trade show booths.</div><div class="eq-price">$110<small>/day</small></div><div class="eq-acts"><button class="pab pabp">Reserve</button><button class="pab pabo">Details</button></div></div></div>
+      <div class="eq-card"><div class="eq-img">📺</div><div class="eq-body-card"><div class="eq-brand">Samsung</div><div class="eq-name">85" QLED Commercial TV</div><div class="eq-desc">Massive 85" QLED panel with quantum dot color and 4K resolution. Makes any display wall a statement.</div><div class="eq-price">$165<small>/day</small></div><div class="eq-acts"><button class="pab pabp">Reserve</button><button class="pab pabo">Details</button></div></div></div>
+      <div class="eq-card"><div class="eq-img">🖥️</div><div class="eq-body-card"><div class="eq-brand">LG</div><div class="eq-name">43" Touch Screen Display</div><div class="eq-desc">Interactive 43" 4K touchscreen for product demos, kiosks, and interactive presentations.</div><div class="eq-price">$90<small>/day</small></div><div class="eq-acts"><button class="pab pabp">Reserve</button><button class="pab pabo">Details</button></div></div></div>
+      <div class="eq-card"><div class="eq-img">📺</div><div class="eq-body-card"><div class="eq-brand">Sony</div><div class="eq-name">65" BRAVIA 4K Pro Display</div><div class="eq-desc">Professional-grade Sony BRAVIA with XR processor. Exceptional image accuracy for high-end events.</div><div class="eq-price">$89<small>/day</small></div><div class="eq-acts"><button class="pab pabp">Reserve</button><button class="pab pabo">Details</button></div></div></div>
+      <div class="eq-card"><div class="eq-img">🖥️</div><div class="eq-body-card"><div class="eq-brand">Samsung</div><div class="eq-name">TV Stand + Mount Package</div><div class="eq-desc">Heavy-duty adjustable floor stand or VESA wall mount solution. Available for any TV size rental.</div><div class="eq-price">$25<small>/day add-on</small></div><div class="eq-acts"><button class="pab pabp">Add to Rental</button><button class="pab pabo">Details</button></div></div></div>
+    </div>
+  </div>
+  <div class="ctaband"><h2>Need a TV Wall Setup?</h2><p>We can configure multi-screen arrays and video distribution for trade shows and corporate events.</p><div class="ctabtns"><button class="bcw" onclick="showPage('contact')">Get a Quote</button><button class="bcg" onclick="showPage('equipment')">Browse All Equipment</button></div></div>
+  <footer><div class="fm"><div><div class="fbl" onclick="showPage('home')"><img src="ridgeview-logo.png" alt="RidgeView Event Technology" style="height:44px;width:auto;display:block;margin-bottom:.5rem"></div><p class="ftag">Professional AV sales and rentals for live events of every scale.</p><div class="fph">📞 (562) 321-1858</div></div><div class="fc"><h4>Equipment</h4><ul><li><a onclick="showPage('eq-televisions')">Televisions</a></li><li><a onclick="showPage('eq-monitors')">Monitors</a></li><li><a onclick="showPage('eq-projectors')">Projectors</a></li></ul></div><div class="fc"><h4>Company</h4><ul><li><a onclick="showPage('about')">About Us</a></li><li><a onclick="showPage('rentals')">Rental Info</a></li></ul></div><div class="fc"><h4>Support</h4><ul><li><a onclick="showPage('contact')">Contact</a></li><li><a>FAQ</a></li></ul></div></div><div class="fb"><span>© 2026 RidgeView Event Technology.</span><span>Privacy · Terms</span></div></footer>
+</div>
+
+<!-- ════ MONITORS ════ -->
+<div id="page-eq-monitors" class="page">
+  <div class="eq-hero">
+    <div class="eq-breadcrumb"><span onclick="showPage('equipment')">Equipment</span> › Monitors</div>
+    <h1>🖥️ Monitors</h1>
+    <p>Stage monitors, confidence monitors, reference monitors, and IEM systems for performers and presenters.</p>
+  </div>
+  <div class="eq-body">
+    <div class="eq-back" onclick="showPage('equipment')">← Back to All Equipment</div>
+    <div class="eq-filter-bar">
+      <button class="eq-ftag active">All</button>
+      <button class="eq-ftag">Rent</button>
+      <button class="eq-ftag">Buy</button>
+      <button class="eq-ftag">Stage Wedge</button>
+      <button class="eq-ftag">IEM</button>
+      <button class="eq-ftag">Confidence</button>
+    </div>
+    <div class="eq-grid reveal">
+      <div class="eq-card"><div class="eq-img">🔈</div><div class="eq-body-card"><div class="eq-brand">d&b Audiotechnik</div><div class="eq-name">M4 Stage Monitor Wedge</div><div class="eq-desc">Professional 12" coaxial stage wedge monitor. Ultra-flat response with controlled dispersion for performers.</div><div class="eq-price">$45<small>/day</small></div><div class="eq-acts"><button class="pab pabp">Reserve</button><button class="pab pabo">Details</button></div></div></div>
+      <div class="eq-card"><div class="eq-img">🎧</div><div class="eq-body-card"><div class="eq-brand">Sennheiser</div><div class="eq-name">EW-IEM G4 Wireless System</div><div class="eq-desc">Wireless in-ear monitor system with 20Hz–20kHz transmission. Used by touring artists worldwide.</div><div class="eq-price">$1,299 <small>or $65/day</small></div><div class="eq-acts"><button class="pab pabp">Add to Cart</button><button class="pab pabo">Rent</button></div></div></div>
+      <div class="eq-card"><div class="eq-img">🖥️</div><div class="eq-body-card"><div class="eq-brand">Datavideo</div><div class="eq-name">TLM-170H Confidence Monitor</div><div class="eq-desc">17" confidence monitor for presenters. Reads teleprompter scripts and shows stage timing cues.</div><div class="eq-price">$55<small>/day</small></div><div class="eq-acts"><button class="pab pabp">Reserve</button><button class="pab pabo">Details</button></div></div></div>
+      <div class="eq-card"><div class="eq-img">🔉</div><div class="eq-body-card"><div class="eq-brand">QSC</div><div class="eq-name">K12.2 Powered Floor Monitor</div><div class="eq-desc">12" full-range powered monitor usable as floor wedge. 2000W with deep DSP control and 131dB SPL.</div><div class="eq-price">$45<small>/day</small></div><div class="eq-acts"><button class="pab pabp">Reserve</button><button class="pab pabo">Details</button></div></div></div>
+      <div class="eq-card"><div class="eq-img">🎧</div><div class="eq-body-card"><div class="eq-brand">Shure</div><div class="eq-name">PSM 1000 IEM System</div><div class="eq-desc">Dual-channel wireless IEM system with Shure's HH Band Scan. Professional-grade RF performance.</div><div class="eq-price">$2,499 <small>or $95/day</small></div><div class="eq-acts"><button class="pab pabp">Add to Cart</button><button class="pab pabo">Rent</button></div></div></div>
+      <div class="eq-card"><div class="eq-img">🖥️</div><div class="eq-body-card"><div class="eq-brand">Marshall Electronics</div><div class="eq-name">V-LCD70-IPHD 7" Monitor</div><div class="eq-desc">Compact 7" HD field monitor for camera operators and video crews. Includes sun hood and stand mount.</div><div class="eq-price">$35<small>/day</small></div><div class="eq-acts"><button class="pab pabp">Reserve</button><button class="pab pabo">Details</button></div></div></div>
+    </div>
+  </div>
+  <div class="ctaband"><h2>Building a Monitor System?</h2><p>We'll spec out a full monitor mix system including console sends, IEM, and stage wedges.</p><div class="ctabtns"><button class="bcw" onclick="showPage('contact')">Get a Quote</button><button class="bcg" onclick="showPage('equipment')">Browse All Equipment</button></div></div>
+  <footer><div class="fm"><div><div class="fbl" onclick="showPage('home')"><img src="ridgeview-logo.png" alt="RidgeView Event Technology" style="height:44px;width:auto;display:block;margin-bottom:.5rem"></div><p class="ftag">Professional AV sales and rentals for live events of every scale.</p><div class="fph">📞 (562) 321-1858</div></div><div class="fc"><h4>Equipment</h4><ul><li><a onclick="showPage('eq-televisions')">Televisions</a></li><li><a onclick="showPage('eq-monitors')">Monitors</a></li><li><a onclick="showPage('eq-projectors')">Projectors</a></li></ul></div><div class="fc"><h4>Company</h4><ul><li><a onclick="showPage('about')">About Us</a></li><li><a onclick="showPage('rentals')">Rental Info</a></li></ul></div><div class="fc"><h4>Support</h4><ul><li><a onclick="showPage('contact')">Contact</a></li><li><a>FAQ</a></li></ul></div></div><div class="fb"><span>© 2026 RidgeView Event Technology.</span><span>Privacy · Terms</span></div></footer>
+</div>
+
+<!-- ════ PROJECTORS ════ -->
+<div id="page-eq-projectors" class="page">
+  <div class="eq-hero">
+    <div class="eq-breadcrumb"><span onclick="showPage('equipment')">Equipment</span> › Projectors</div>
+    <h1>📽️ Projectors</h1>
+    <p>Laser projectors, LCD projectors, ultra-short throw, and full projection systems for any screen size.</p>
+  </div>
+  <div class="eq-body">
+    <div class="eq-back" onclick="showPage('equipment')">← Back to All Equipment</div>
+    <div class="eq-filter-bar">
+      <button class="eq-ftag active">All</button>
+      <button class="eq-ftag">Rent</button>
+      <button class="eq-ftag">Buy</button>
+      <button class="eq-ftag">Laser</button>
+      <button class="eq-ftag">4K</button>
+      <button class="eq-ftag">Ultra-Short Throw</button>
+    </div>
+    <div class="eq-grid reveal">
+      <div class="eq-card"><div class="eq-img">📽️</div><div class="eq-body-card"><div class="eq-brand">Barco</div><div class="eq-name">UDX-4K32 Laser Projector</div><div class="eq-desc">32,000-lumen 4K laser projector with Barco's PULSE engine. The industry standard for large venues.</div><div class="eq-price">$22,500 <small>or $450/day</small></div><div class="eq-acts"><button class="pab pabp">Add to Cart</button><button class="pab pabo">Rent</button></div></div></div>
+      <div class="eq-card"><div class="eq-img">🎥</div><div class="eq-body-card"><div class="eq-brand">Christie</div><div class="eq-name">Crimson WU25 Laser Projector</div><div class="eq-desc">25,000-lumen WUXGA 3-chip DLP laser. Renowned reliability for permanent installs and touring use.</div><div class="eq-price">$18,000 <small>or $380/day</small></div><div class="eq-acts"><button class="pab pabp">Add to Cart</button><button class="pab pabo">Rent</button></div></div></div>
+      <div class="eq-card"><div class="eq-img">📽️</div><div class="eq-body-card"><div class="eq-brand">Epson</div><div class="eq-name">EB-PU2220B Laser Projector</div><div class="eq-desc">20,000-lumen 3LCD laser for conferences and mid-size venues. Exceptional color and sharp text.</div><div class="eq-price">$8,999 <small>or $195/day</small></div><div class="eq-acts"><button class="pab pabp">Add to Cart</button><button class="pab pabo">Rent</button></div></div></div>
+      <div class="eq-card"><div class="eq-img">🎥</div><div class="eq-body-card"><div class="eq-brand">Optoma</div><div class="eq-name">ZU1050 10,000L Laser</div><div class="eq-desc">10,000-lumen WUXGA laser projector. Great for corporate events, house of worship, and education.</div><div class="eq-price">$4,999 <small>or $120/day</small></div><div class="eq-acts"><button class="pab pabp">Add to Cart</button><button class="pab pabo">Rent</button></div></div></div>
+      <div class="eq-card"><div class="eq-img">📽️</div><div class="eq-body-card"><div class="eq-brand">Sony</div><div class="eq-name">VPL-GTZ380 4K Laser</div><div class="eq-desc">Native 4K 10,000-lumen laser with SXRD panels. Best-in-class image quality for high-end productions.</div><div class="eq-price">$35,000 <small>or $620/day</small></div><div class="eq-acts"><button class="pab pabp">Add to Cart</button><button class="pab pabo">Rent</button></div></div></div>
+      <div class="eq-card"><div class="eq-img">🖼️</div><div class="eq-body-card"><div class="eq-brand">Da-Lite</div><div class="eq-name">Fast-Fold Screen Package</div><div class="eq-desc">Fast-fold projection screen available in 9x12 through 16x28 sizes. Includes frame, legs, and carry case.</div><div class="eq-price">$75<small>/day</small></div><div class="eq-acts"><button class="pab pabp">Reserve</button><button class="pab pabo">Details</button></div></div></div>
+    </div>
+  </div>
+  <div class="ctaband"><h2>Need a Complete Projection Setup?</h2><p>We'll handle projector, screen, rigging, and signal routing for a turnkey projection solution.</p><div class="ctabtns"><button class="bcw" onclick="showPage('contact')">Get a Quote</button><button class="bcg" onclick="showPage('equipment')">Browse All Equipment</button></div></div>
+  <footer><div class="fm"><div><div class="fbl" onclick="showPage('home')"><img src="ridgeview-logo.png" alt="RidgeView Event Technology" style="height:44px;width:auto;display:block;margin-bottom:.5rem"></div><p class="ftag">Professional AV sales and rentals for live events of every scale.</p><div class="fph">📞 (562) 321-1858</div></div><div class="fc"><h4>Equipment</h4><ul><li><a onclick="showPage('eq-televisions')">Televisions</a></li><li><a onclick="showPage('eq-monitors')">Monitors</a></li><li><a onclick="showPage('eq-projectors')">Projectors</a></li></ul></div><div class="fc"><h4>Company</h4><ul><li><a onclick="showPage('about')">About Us</a></li><li><a onclick="showPage('rentals')">Rental Info</a></li></ul></div><div class="fc"><h4>Support</h4><ul><li><a onclick="showPage('contact')">Contact</a></li><li><a>FAQ</a></li></ul></div></div><div class="fb"><span>© 2026 RidgeView Event Technology.</span><span>Privacy · Terms</span></div></footer>
+</div>
+
+<!-- ════ MICROPHONES ════ -->
+<div id="page-eq-microphones" class="page">
+  <div class="eq-hero">
+    <div class="eq-breadcrumb"><span onclick="showPage('equipment')">Equipment</span> › Microphones</div>
+    <h1>🎤 Microphones</h1>
+    <p>Handheld, lavalier, headset, and instrument microphones for live events, broadcast, and studio.</p>
+  </div>
+  <div class="eq-body">
+    <div class="eq-back" onclick="showPage('equipment')">← Back to All Equipment</div>
+    <div class="eq-filter-bar">
+      <button class="eq-ftag active">All</button>
+      <button class="eq-ftag">Buy</button>
+      <button class="eq-ftag">Rent</button>
+      <button class="eq-ftag">Wireless</button>
+      <button class="eq-ftag">Lavalier</button>
+      <button class="eq-ftag">Handheld</button>
+    </div>
+    <div class="eq-grid reveal">
+      <div class="eq-card"><div class="eq-img">🎤</div><div class="eq-body-card"><div class="eq-brand">Shure</div><div class="eq-name">Axient Digital ADX5D Receiver</div><div class="eq-desc">Dual-channel wireless receiver with ShowLink remote control and Quadversity antenna diversity.</div><div class="eq-price">$2,149</div><div class="eq-acts"><button class="pab pabp">Add to Cart</button><button class="pab pabo">Details</button></div></div></div>
+      <div class="eq-card"><div class="eq-img">🎙️</div><div class="eq-body-card"><div class="eq-brand">Sennheiser</div><div class="eq-name">EW-DX EM 4 DANTE Receiver</div><div class="eq-desc">4-channel UHF receiver with DANTE networking. Seamless integration into digital audio systems.</div><div class="eq-price">$1,875</div><div class="eq-acts"><button class="pab pabp">Add to Cart</button><button class="pab pabo">Details</button></div></div></div>
+      <div class="eq-card"><div class="eq-img">🎤</div><div class="eq-body-card"><div class="eq-brand">DPA Microphones</div><div class="eq-name">4006A Omnidirectional Mic</div><div class="eq-desc">Reference-grade omnidirectional condenser microphone for orchestral, choir, and broadcast applications.</div><div class="eq-price">$949</div><div class="eq-acts"><button class="pab pabp">Add to Cart</button><button class="pab pabo">Details</button></div></div></div>
+      <div class="eq-card"><div class="eq-img">🎙️</div><div class="eq-body-card"><div class="eq-brand">Shure</div><div class="eq-name">SM58 Dynamic Vocal Mic</div><div class="eq-desc">The world's most popular vocal microphone. Legendary durability and performance for live vocals.</div><div class="eq-price">$99 <small>or $12/day</small></div><div class="eq-acts"><button class="pab pabp">Add to Cart</button><button class="pab pabo">Rent</button></div></div></div>
+      <div class="eq-card"><div class="eq-img">🎤</div><div class="eq-body-card"><div class="eq-brand">Countryman</div><div class="eq-name">B3 Lavalier Microphone</div><div class="eq-desc">Omnidirectional lavalier with natural sound and rugged build. Trusted for theater, TV, and presentations.</div><div class="eq-price">$349 <small>or $25/day</small></div><div class="eq-acts"><button class="pab pabp">Add to Cart</button><button class="pab pabo">Rent</button></div></div></div>
+      <div class="eq-card"><div class="eq-img">🎙️</div><div class="eq-body-card"><div class="eq-brand">Audio-Technica</div><div class="eq-name">AT2035 Cardioid Condenser</div><div class="eq-desc">Large-diaphragm condenser microphone ideal for studio vocals, podcasting, and broadcast voice-overs.</div><div class="eq-price">$149 <small>or $18/day</small></div><div class="eq-acts"><button class="pab pabp">Add to Cart</button><button class="pab pabo">Rent</button></div></div></div>
+    </div>
+  </div>
+  <div class="ctaband"><h2>Need a Full Wireless Mic Package?</h2><p>We'll put together a complete RF coordination and wireless microphone package for your event.</p><div class="ctabtns"><button class="bcw" onclick="showPage('contact')">Get a Custom Quote</button><button class="bcg" onclick="showPage('equipment')">Browse All Equipment</button></div></div>
+  <footer><div class="fm"><div><div class="fbl" onclick="showPage('home')"><img src="ridgeview-logo.png" alt="RidgeView Event Technology" style="height:44px;width:auto;display:block;margin-bottom:.5rem"></div><p class="ftag">Professional AV sales and rentals for live events of every scale.</p><div class="fph">📞 (562) 321-1858</div></div><div class="fc"><h4>Equipment</h4><ul><li><a onclick="showPage('eq-speakers')">Speakers</a></li><li><a onclick="showPage('eq-mixers')">Mixers</a></li><li><a onclick="showPage('eq-microphones')">Microphones</a></li></ul></div><div class="fc"><h4>Company</h4><ul><li><a onclick="showPage('about')">About Us</a></li><li><a onclick="showPage('rentals')">Rental Info</a></li></ul></div><div class="fc"><h4>Support</h4><ul><li><a onclick="showPage('contact')">Contact</a></li><li><a>FAQ</a></li></ul></div></div><div class="fb"><span>© 2026 RidgeView Event Technology.</span><span>Privacy · Terms</span></div></footer>
+</div>
+
+<script>
+function showPage(name){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  const target = document.getElementById('page-'+name);
+  if(target) target.classList.add('active');
+  document.querySelectorAll('.nl a').forEach(a=>a.classList.toggle('active',a.dataset.page===name));
+  window.scrollTo({top:0,behavior:'smooth'});
+  setTimeout(initReveals,80);
+  window.location.hash = name;
+}
+
+function toggleDropdown(e){
+  e.stopPropagation();
+  const menu = document.getElementById('eq-dropdown');
+  menu.classList.toggle('open');
+}
+
+function closeDropdown(){
+  document.getElementById('eq-dropdown').classList.remove('open');
+}
+
+// Close dropdown when clicking anywhere outside
+document.addEventListener('click', function(e){
+  const dropdown = document.getElementById('eq-dropdown');
+  if(dropdown && !e.target.closest('.nav-dropdown')){
+    dropdown.classList.remove('open');
+  }
+});
+
+function initReveals(){
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});
+  },{threshold:0.12});
+  document.querySelectorAll('.reveal').forEach(el=>{
+    if(!el.classList.contains('visible')) io.observe(el);
+  });
+}
+
+// Product tab filtering
+function filterTab(tab, el){
+  document.querySelectorAll('.ptab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.pcard').forEach(card=>{
+    if(tab==='all' || card.dataset.cat===tab){
+      card.style.display='';
+    } else {
+      card.style.display='none';
+    }
+  });
+}
+
+// Handle hash changes (browser back/forward)
+window.addEventListener('hashchange', function(){
+  const hash = window.location.hash.slice(1) || 'home';
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  const target = document.getElementById('page-'+hash);
+  if(target) target.classList.add('active');
+  document.querySelectorAll('.nl a').forEach(a=>a.classList.toggle('active',a.dataset.page===hash));
+  window.scrollTo({top:0,behavior:'smooth'});
+  setTimeout(initReveals,80);
+});
+
+// On load
+document.addEventListener('DOMContentLoaded',function(){
+  const initialPage = window.location.hash.slice(1) || 'home';
+  showPage(initialPage);
+  initReveals();
+});
+</script>
