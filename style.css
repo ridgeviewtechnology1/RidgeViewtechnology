@@ -124,7 +124,7 @@ h1, h2, h3, h4, h5 {
   position: sticky;
   top: 0;
   z-index: 300;
-  height: 84px;
+  height: 96px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -142,10 +142,10 @@ h1, h2, h3, h4, h5 {
 }
 .nav__links a {
   font-family: 'Montserrat', sans-serif;
-  font-size: 1.1rem;
-  font-weight: 500;
+  font-size: 1.25rem;
+  font-weight: 600;
   color: var(--muted);
-  padding: .65rem 1.6rem;
+  padding: .75rem 2rem;
   border-radius: 6px;
   transition: color .15s, background .15s;
 }
