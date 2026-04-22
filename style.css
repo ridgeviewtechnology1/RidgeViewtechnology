@@ -545,6 +545,28 @@ h1, h2, h3, h4, h5 {
 }
 .checkbox-item:has(input:checked) { border-color: var(--accent); background: var(--accent-glow); }
 
+.rfp-upload {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  background: var(--surface);
+  border: 1.5px dashed var(--border);
+  border-radius: var(--r);
+  padding: 1.2rem 1.4rem;
+  margin-top: .3rem;
+  transition: border-color .15s;
+}
+.rfp-upload:hover { border-color: var(--accent); }
+.rfp-upload__title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: .92rem;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: .2rem;
+}
+.rfp-upload__sub { font-size: .82rem; color: var(--muted); }
+.rfp-note { font-size: .8rem; color: var(--dim); margin-top: .6rem; }
+
 .contact-info { display: flex; flex-direction: column; gap: 1.5rem; padding-top: .5rem; }
 .contact-info h2 { font-size: 1.45rem; margin-bottom: .2rem; }
 .contact-info__sub { font-size: .88rem; color: var(--muted); margin-bottom: .5rem; }
@@ -595,7 +617,7 @@ footer { background: var(--bg); border-top: 1px solid var(--border); }
   margin: 0 auto;
   padding: 5rem 4rem;
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
+  grid-template-columns: 2fr 1fr 1fr;
   gap: 3rem;
 }
 .footer__brand img { height: 42px; width: auto; margin-bottom: 1.1rem; }
