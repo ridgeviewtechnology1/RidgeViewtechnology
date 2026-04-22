@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — RidgeView Event Technology</title>
+  <link rel="icon" type="image/png" href="Mountain-Logo.png">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .mission-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .mission-grid p {
+      font-size: 1.03rem;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 1.2rem;
+    }
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+    .value-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 var(--r) var(--r) 0;
+      padding: 1.6rem 1.8rem;
+    }
+    .value-card h3 {
+      font-size: .95rem;
+      font-weight: 700;
+      margin-bottom: .5rem;
+      letter-spacing: -.01em;
+    }
+    .value-card p {
+      font-size: .88rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+    @media (max-width: 900px) {
+      .mission-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .values-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav class="nav">
+  <a href="index.html" class="nav__logo">
+    <img src="ridgeview-logo-dark.png" alt="RidgeView Event Technology">
+  </a>
+  <ul class="nav__links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav__cta">
+    <a href="contact.html" class="btn btn--primary">Get in Touch</a>
+  </div>
+  <button class="nav__hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="container">
+    <div class="label page-hero__label">About RidgeView</div>
+    <h1>Built by People<br>Who Do the Work</h1>
+    <p>RidgeView Event Technology was founded by AV professionals who spent decades on the floor of live events — and decided to build the company they always wanted to work with.</p>
+  </div>
+</div>
+
+<!-- MISSION -->
+<section class="section">
+  <div class="container">
+    <div class="mission-grid reveal">
+      <div>
+        <div class="label">Our Mission</div>
+        <h2 class="section-title">Precision Production. Every Time.</h2>
+        <p>We exist to take the technical burden off our clients. When you work with RidgeView, you do not need to manage vendors, chase equipment, or worry about what happens if something goes wrong on show day. That is our job.</p>
+        <p>We combine deep technical expertise with disciplined project management to deliver events that are seamless from load-in to final strike. Our clients trust us because we have earned it — one event at a time.</p>
+        <p>From the initial site visit to the post-event report, we are with you every step of the way. That is what full-service production means to us.</p>
+        <a href="contact.html" class="btn btn--primary" style="margin-top:.5rem;">Work With Us</a>
+      </div>
+      <div class="about-split__visual" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:2rem;display:flex;flex-direction:column;gap:1rem;">
+        <div class="stat-card">
+          <div class="stat-card__number">500+</div>
+          <div class="stat-card__label">Corporate Events Executed</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__number">100+</div>
+          <div class="stat-card__label">Enterprise Clients Served</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__number">20+</div>
+          <div class="stat-card__label">Years AV Leadership</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__number">4.9</div>
+          <div class="stat-card__label">Average Client Satisfaction</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="section section--alt" id="team">
+  <div class="container">
+    <div class="sh">
+      <div class="label">Leadership</div>
+      <h2 class="section-title">Led by Proven Expertise</h2>
+      <p class="section-desc">With over two decades of hands-on experience in live event production, our leadership has delivered hundreds of corporate events nationwide.</p>
+    </div>
+    <div class="team-grid reveal">
+
+      <div class="team-card">
+        <img class="team-card__photo" src="johnny.jpg" alt="Johnny Ridgill">
+        <div class="team-card__body">
+          <div class="team-card__name">Johnny Ridgill</div>
+          <div class="team-card__role">Co-Founder &amp; Technical Director</div>
+          <p class="team-card__bio">Johnny brings over 20 years of experience in live event production, AV system design, and technical direction for high-profile corporate events nationwide. He leads RidgeView's technical strategy, ensuring every project is executed with precision, safety, and a relentless commitment to quality. When he is not on-site managing a show, he is designing the systems for the next one.</p>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <img class="team-card__photo" src="tiffany.jpg" alt="Tiffany Ridgill">
+        <div class="team-card__body">
+          <div class="team-card__name">Tiffany Ridgill</div>
+          <div class="team-card__role">Co-Founder &amp; Director of Client Experience</div>
+          <p class="team-card__bio">Tiffany oversees client relationships, project management, and event logistics for every RidgeView engagement. With a background in corporate hospitality and event planning, she ensures that every client experiences responsive communication, clear expectations, and a production that runs exactly as promised — from the first conversation to the final wrap.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="section">
+  <div class="container">
+    <div class="sh sh--center">
+      <div class="label">What We Stand For</div>
+      <h2 class="section-title">How We Approach Every Engagement</h2>
+      <p class="section-desc">These are not aspirational statements — they are the standards we hold ourselves to on every project.</p>
+    </div>
+    <div class="values-grid reveal">
+      <div class="value-card">
+        <h3>Accountability</h3>
+        <p>We own the technical outcome of your event. If something is not right, we fix it — no finger-pointing, no excuses.</p>
+      </div>
+      <div class="value-card">
+        <h3>Transparency</h3>
+        <p>Your proposal is complete and honest. You know exactly what you are getting, what it costs, and what to expect on show day.</p>
+      </div>
+      <div class="value-card">
+        <h3>Precision</h3>
+        <p>Details matter in live production. We document, rehearse, and test everything so execution is clean and confident.</p>
+      </div>
+      <div class="value-card">
+        <h3>Partnership</h3>
+        <p>We work as an extension of your team — not a vendor you manage. Your success is the measure of ours.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EVENT TYPES -->
+<section class="section section--alt">
+  <div class="container">
+    <div class="sh">
+      <div class="label">Who We Serve</div>
+      <h2 class="section-title">Events We Specialize In</h2>
+      <p class="section-desc">We have delivered production across a wide range of corporate and live event formats.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:2rem 3rem;max-width:900px;" class="reveal">
+      <div style="border-left:2px solid var(--accent);padding-left:1.5rem;">
+        <h3 style="font-size:1rem;margin-bottom:.45rem;">Corporate Conferences</h3>
+        <p style="font-size:.9rem;color:var(--muted);line-height:1.7;">General sessions, breakouts, awards galas, and multi-day conference productions for enterprise and associations.</p>
+      </div>
+      <div style="border-left:2px solid var(--accent);padding-left:1.5rem;">
+        <h3 style="font-size:1rem;margin-bottom:.45rem;">Product Launches</h3>
+        <p style="font-size:.9rem;color:var(--muted);line-height:1.7;">High-impact reveals, experiential activations, and press events that demand flawless technical execution.</p>
+      </div>
+      <div style="border-left:2px solid var(--accent);padding-left:1.5rem;">
+        <h3 style="font-size:1rem;margin-bottom:.45rem;">Trade Shows &amp; Expos</h3>
+        <p style="font-size:.9rem;color:var(--muted);line-height:1.7;">Booth AV, main stage production, presentation theaters, and full-show technical management.</p>
+      </div>
+      <div style="border-left:2px solid var(--accent);padding-left:1.5rem;">
+        <h3 style="font-size:1rem;margin-bottom:.45rem;">Galas &amp; Award Shows</h3>
+        <p style="font-size:.9rem;color:var(--muted);line-height:1.7;">Elegant event production with broadcast-quality video, dynamic lighting, and full show calling.</p>
+      </div>
+      <div style="border-left:2px solid var(--accent);padding-left:1.5rem;">
+        <h3 style="font-size:1rem;margin-bottom:.45rem;">Hybrid &amp; Virtual Events</h3>
+        <p style="font-size:.9rem;color:var(--muted);line-height:1.7;">Live streaming, virtual platforms, and hybrid productions that connect in-room and remote audiences seamlessly.</p>
+      </div>
+      <div style="border-left:2px solid var(--accent);padding-left:1.5rem;">
+        <h3 style="font-size:1rem;margin-bottom:.45rem;">Nonprofit &amp; Fundraising</h3>
+        <p style="font-size:.9rem;color:var(--muted);line-height:1.7;">Mission-driven events where every dollar of production value matters and the story must land perfectly.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-band">
+  <h2>Let's Plan Your Next Production</h2>
+  <p>Connect with our team to discuss your event. We will listen first, then put together a proposal built around your specific needs.</p>
+  <div class="cta-band__btns">
+    <a href="contact.html" class="btn btn--primary">Schedule a Consultation</a>
+    <a href="services.html" class="btn btn--ghost">Explore Our Services</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer__main">
+    <div class="footer__brand">
+      <img src="ridgeview-logo-dark.png" alt="RidgeView Event Technology">
+      <p class="footer__tagline">Professional event technology and production for corporate events nationwide.</p>
+      <div class="footer__phone">(562) 321-1858</div>
+    </div>
+    <div class="footer__col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="services.html">Audio Production</a></li>
+        <li><a href="services.html">Video &amp; Projection</a></li>
+        <li><a href="services.html">Lighting Design</a></li>
+        <li><a href="services.html">Staging &amp; Rigging</a></li>
+        <li><a href="services.html">Show Control</a></li>
+        <li><a href="services.html">Live Production</a></li>
+      </ul>
+    </div>
+    <div class="footer__col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="about.html">Our Team</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer__col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="tel:5623211858">(562) 321-1858</a></li>
+        <li><a href="mailto:info@ridgeviewevents.com">info@ridgeviewevents.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <span>&copy; 2026 RidgeView Event Technology. All rights reserved.</span>
+    <span>Privacy Policy &middot; Terms of Service</span>
+  </div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>

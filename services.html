@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services — RidgeView Event Technology</title>
+  <link rel="icon" type="image/png" href="Mountain-Logo.png">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .service-detail {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 4rem;
+      padding: 3.5rem 0;
+      border-top: 1px solid var(--border);
+    }
+    .service-detail:first-child { border-top: none; padding-top: 0; }
+    .service-detail__meta { padding-top: .2rem; }
+    .service-detail__num {
+      font-family: 'Montserrat', sans-serif;
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: .6rem;
+    }
+    .service-detail__title {
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: -.02em;
+      margin-bottom: .5rem;
+    }
+    .service-detail__icon {
+      width: 48px; height: 48px;
+      background: var(--accent-glow);
+      border: 1px solid rgba(37,99,235,.3);
+      border-radius: var(--r);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      margin-top: 1rem;
+    }
+    .service-detail__icon svg { width: 24px; height: 24px; }
+    .service-detail__body p {
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+    .capability-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem;
+    }
+    .cap-tag {
+      font-family: 'Montserrat', sans-serif;
+      font-size: .75rem;
+      font-weight: 600;
+      color: var(--text);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: .32rem .85rem;
+      border-radius: 20px;
+    }
+
+    @media (max-width: 900px) {
+      .service-detail { grid-template-columns: 1fr; gap: 1.5rem; }
+      .service-detail__icon { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav class="nav">
+  <a href="index.html" class="nav__logo">
+    <img src="ridgeview-logo-dark.png" alt="RidgeView Event Technology">
+  </a>
+  <ul class="nav__links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="services.html" class="active">Services</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav__cta">
+    <a href="contact.html" class="btn btn--primary">Get in Touch</a>
+  </div>
+  <button class="nav__hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="container">
+    <div class="label page-hero__label">What We Do</div>
+    <h1>Complete Event<br>Technology Services</h1>
+    <p>We design, manage, and execute every technical element of your event — audio, video, lighting, staging, and beyond. One team. Total accountability.</p>
+  </div>
+</div>
+
+<!-- SERVICE DETAILS -->
+<section class="section">
+  <div class="container">
+
+    <div class="service-detail reveal">
+      <div class="service-detail__meta">
+        <div class="service-detail__num">01</div>
+        <div class="service-detail__title">Audio Production</div>
+        <div class="service-detail__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/>
+          </svg>
+        </div>
+      </div>
+      <div class="service-detail__body">
+        <p>Clear, powerful audio is the foundation of every successful event. We engineer complete audio systems from the ground up — designed for your specific venue, audience size, and program content. Our engineers handle system design, acoustic analysis, equipment specification, load-in, and full show operation.</p>
+        <p>From intimate boardroom presentations to large-format conference general sessions, we deliver consistent, intelligible audio that supports your message without drawing attention to itself.</p>
+        <div class="capability-tags">
+          <span class="cap-tag">Line Array Systems</span>
+          <span class="cap-tag">Digital Mixing</span>
+          <span class="cap-tag">Wireless RF Coordination</span>
+          <span class="cap-tag">Distributed Audio</span>
+          <span class="cap-tag">DSP Engineering</span>
+          <span class="cap-tag">In-Ear Monitoring</span>
+          <span class="cap-tag">Dante Networking</span>
+          <span class="cap-tag">Acoustic Analysis</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="service-detail reveal">
+      <div class="service-detail__meta">
+        <div class="service-detail__num">02</div>
+        <div class="service-detail__title">Video &amp; Projection</div>
+        <div class="service-detail__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="3" width="20" height="14" rx="2"/>
+            <line x1="8" y1="21" x2="16" y2="21"/>
+            <line x1="12" y1="17" x2="12" y2="21"/>
+          </svg>
+        </div>
+      </div>
+      <div class="service-detail__body">
+        <p>Visual impact drives audience engagement. We design and operate comprehensive video systems that transform your content into an immersive experience — from multi-screen projection to full LED wall installations and broadcast-quality camera systems.</p>
+        <p>Our video team manages signal flow, content playback, camera direction, and real-time switching with redundant systems in place to ensure zero failure during your event.</p>
+        <div class="capability-tags">
+          <span class="cap-tag">LED Wall Systems</span>
+          <span class="cap-tag">Laser Projection</span>
+          <span class="cap-tag">IMAG Camera Systems</span>
+          <span class="cap-tag">Video Switching</span>
+          <span class="cap-tag">Multi-Screen Design</span>
+          <span class="cap-tag">Content Playback</span>
+          <span class="cap-tag">Signal Routing</span>
+          <span class="cap-tag">Broadcast Integration</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="service-detail reveal">
+      <div class="service-detail__meta">
+        <div class="service-detail__num">03</div>
+        <div class="service-detail__title">Lighting Design</div>
+        <div class="service-detail__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+          </svg>
+        </div>
+      </div>
+      <div class="service-detail__body">
+        <p>Lighting shapes how your audience experiences every moment of your event. Our designers create lighting environments that reinforce your brand, direct attention, and elevate production value — from clean corporate looks to dynamic performance atmospheres.</p>
+        <p>We handle all aspects of lighting design, programming, rigging, and operation, with full pre-visualization available for large-format productions.</p>
+        <div class="capability-tags">
+          <span class="cap-tag">Intelligent Moving Lights</span>
+          <span class="cap-tag">DMX Programming</span>
+          <span class="cap-tag">Architectural Lighting</span>
+          <span class="cap-tag">Scenic Lighting</span>
+          <span class="cap-tag">LED Wash Systems</span>
+          <span class="cap-tag">Brand Color Matching</span>
+          <span class="cap-tag">Pre-Visualization</span>
+          <span class="cap-tag">Followspot Operation</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="service-detail reveal">
+      <div class="service-detail__meta">
+        <div class="service-detail__num">04</div>
+        <div class="service-detail__title">Staging &amp; Infrastructure</div>
+        <div class="service-detail__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="14" width="20" height="4" rx="1"/>
+            <line x1="5" y1="18" x2="5" y2="22"/>
+            <line x1="19" y1="18" x2="19" y2="22"/>
+            <path d="M7 14V9l5-5 5 5v5"/>
+          </svg>
+        </div>
+      </div>
+      <div class="service-detail__body">
+        <p>A well-engineered physical environment is the platform everything else builds upon. We design and install all staging and rigging infrastructure — from custom-height platforms to full truss grids — with safety and precision at every step.</p>
+        <p>Our rigging team is certified and experienced in both venue and ground-supported systems, coordinating closely with venue management to ensure compliance and structural integrity throughout the build.</p>
+        <div class="capability-tags">
+          <span class="cap-tag">Modular Stage Platforms</span>
+          <span class="cap-tag">Custom Truss Design</span>
+          <span class="cap-tag">Chain Motor Rigging</span>
+          <span class="cap-tag">Power Distribution</span>
+          <span class="cap-tag">Ground Support</span>
+          <span class="cap-tag">Load Calculations</span>
+          <span class="cap-tag">Venue Coordination</span>
+          <span class="cap-tag">Safety Compliance</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="service-detail reveal">
+      <div class="service-detail__meta">
+        <div class="service-detail__num">05</div>
+        <div class="service-detail__title">Show Control</div>
+        <div class="service-detail__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="4" y1="21" x2="4" y2="14"/>
+            <line x1="4" y1="10" x2="4" y2="3"/>
+            <line x1="12" y1="21" x2="12" y2="12"/>
+            <line x1="12" y1="8" x2="12" y2="3"/>
+            <line x1="20" y1="21" x2="20" y2="16"/>
+            <line x1="20" y1="12" x2="20" y2="3"/>
+            <line x1="1" y1="14" x2="7" y2="14"/>
+            <line x1="9" y1="8" x2="15" y2="8"/>
+            <line x1="17" y1="16" x2="23" y2="16"/>
+          </svg>
+        </div>
+      </div>
+      <div class="service-detail__body">
+        <p>In complex productions, every system must communicate seamlessly. Our show control engineers design and operate the backbone that ties audio, video, lighting, and communications together — ensuring every cue fires at the right moment with zero ambiguity.</p>
+        <p>We build redundancy into every critical signal path, so a single point of failure never becomes a production failure in front of your audience.</p>
+        <div class="capability-tags">
+          <span class="cap-tag">Show Control Systems</span>
+          <span class="cap-tag">Timecode Sync</span>
+          <span class="cap-tag">Redundant Signal Paths</span>
+          <span class="cap-tag">Network AV (AV-over-IP)</span>
+          <span class="cap-tag">Cue Management</span>
+          <span class="cap-tag">Intercom Systems</span>
+          <span class="cap-tag">Event Networking</span>
+          <span class="cap-tag">System Integration</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="service-detail reveal">
+      <div class="service-detail__meta">
+        <div class="service-detail__num">06</div>
+        <div class="service-detail__title">Live Production</div>
+        <div class="service-detail__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="23 7 16 12 23 17 23 7"/>
+            <rect x="1" y="5" width="15" height="14" rx="2"/>
+          </svg>
+        </div>
+      </div>
+      <div class="service-detail__body">
+        <p>Whether your audience is in the room or watching from anywhere in the world, we produce a broadcast-quality experience. We operate live streaming, virtual event platforms, and hybrid productions that deliver the same professionalism online as on-site.</p>
+        <p>Our production team manages encoding, streaming delivery, camera direction, and real-time graphics — extending your event reach without compromising production quality.</p>
+        <div class="capability-tags">
+          <span class="cap-tag">Live Streaming</span>
+          <span class="cap-tag">Hybrid Event Production</span>
+          <span class="cap-tag">Multi-Camera Direction</span>
+          <span class="cap-tag">Virtual Backgrounds</span>
+          <span class="cap-tag">Real-Time Graphics</span>
+          <span class="cap-tag">CDN Delivery</span>
+          <span class="cap-tag">Recording &amp; Post</span>
+          <span class="cap-tag">Virtual Platforms</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- OUR PROCESS -->
+<section class="section section--alt">
+  <div class="container">
+    <div class="sh">
+      <div class="label">How We Work</div>
+      <h2 class="section-title">Our Production Process</h2>
+      <p class="section-desc">Every engagement follows a proven framework — structured to eliminate surprises and deliver consistent results across every event.</p>
+    </div>
+    <div class="process-steps reveal">
+      <div class="process-step">
+        <span class="process-number">01</span>
+        <div>
+          <h3>Initial Consultation</h3>
+          <p>We begin by understanding your event objectives, audience, venue, and technical requirements. This shapes every decision that follows.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <span class="process-number">02</span>
+        <div>
+          <h3>Site Visit &amp; Technical Assessment</h3>
+          <p>Our team visits your venue to evaluate infrastructure, power, rigging points, acoustics, and any logistical constraints before we begin designing.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <span class="process-number">03</span>
+        <div>
+          <h3>Scope of Work &amp; Proposal</h3>
+          <p>We document all systems, labor, and deliverables in a detailed, transparent proposal — no hidden costs, no vague line items.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <span class="process-number">04</span>
+        <div>
+          <h3>Pre-Production Planning</h3>
+          <p>We develop your run of show, technical workflows, and production schedules. All stakeholders and vendors are coordinated well in advance.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <span class="process-number">05</span>
+        <div>
+          <h3>System Design &amp; Engineering</h3>
+          <p>Audio, video, lighting, and signal routing systems are engineered in detail. Equipment is finalized, tested, and prepared before load-in begins.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <span class="process-number">06</span>
+        <div>
+          <h3>On-Site Execution</h3>
+          <p>Our team installs, tests, and operates every system. We provide real-time technical direction and troubleshooting throughout your event day.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <span class="process-number">07</span>
+        <div>
+          <h3>Wrap &amp; Post-Event Review</h3>
+          <p>We strike all equipment, document production outcomes, and deliver a post-event summary with observations and recommendations for future events.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-band">
+  <h2>Let's Build Your Next Production</h2>
+  <p>Tell us about your event and we will put together a complete technical proposal tailored to your venue, audience, and objectives.</p>
+  <div class="cta-band__btns">
+    <a href="contact.html" class="btn btn--primary">Request a Proposal</a>
+    <a href="about.html" class="btn btn--ghost">Meet Our Team</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer__main">
+    <div class="footer__brand">
+      <img src="ridgeview-logo-dark.png" alt="RidgeView Event Technology">
+      <p class="footer__tagline">Professional event technology and production for corporate events nationwide.</p>
+      <div class="footer__phone">(562) 321-1858</div>
+    </div>
+    <div class="footer__col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="services.html">Audio Production</a></li>
+        <li><a href="services.html">Video &amp; Projection</a></li>
+        <li><a href="services.html">Lighting Design</a></li>
+        <li><a href="services.html">Staging &amp; Rigging</a></li>
+        <li><a href="services.html">Show Control</a></li>
+        <li><a href="services.html">Live Production</a></li>
+      </ul>
+    </div>
+    <div class="footer__col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="about.html">Our Team</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer__col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="tel:5623211858">(562) 321-1858</a></li>
+        <li><a href="mailto:info@ridgeviewevents.com">info@ridgeviewevents.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <span>&copy; 2026 RidgeView Event Technology. All rights reserved.</span>
+    <span>Privacy Policy &middot; Terms of Service</span>
+  </div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
