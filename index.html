@@ -81,21 +81,7 @@
     .hero__btns { display: flex; gap: 1rem; flex-wrap: wrap; }
 
     /* split layout for about section */
-    .about-split {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 5rem;
-      align-items: center;
-    }
-    .about-split__visual {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--rl);
-      padding: 2rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
+    .about-split { max-width: 780px; }
 
     @media (max-width: 900px) {
       .hero__content { padding: 3rem 1.5rem; }
@@ -287,24 +273,6 @@
             </div>
           </li>
         </ul>
-      </div>
-      <div class="about-split__visual">
-        <div class="stat-card">
-          <div class="stat-card__number">500+</div>
-          <div class="stat-card__label">Corporate Events Executed</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-card__number">100+</div>
-          <div class="stat-card__label">Enterprise Clients Served</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-card__number">20+</div>
-          <div class="stat-card__label">Years AV Leadership</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-card__number">4.9</div>
-          <div class="stat-card__label">Average Client Satisfaction</div>
-        </div>
       </div>
     </div>
   </div>
