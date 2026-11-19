@@ -18,7 +18,9 @@
     <li><a href="index.html">Home</a></li>
     <li><a href="services.html">Services</a></li>
     <li><a href="about.html">About</a></li>
-    <li><a href="contact.html" class="active">Contact</a></li>
+    <li><a href="contact.html" class="active">Contact Us</a></li>
+    <li><a href="terms-and-conditions.html">Terms &amp; Conditions</a></li>
+    <li><a href="privacy-policy.html">Privacy Policy</a></li>
   </ul>
   <div class="nav__cta">
     <a href="contact.html" class="btn btn--primary">Get in Touch</a>
@@ -31,7 +33,9 @@
       <li><a href="index.html">Home</a></li>
       <li><a href="services.html">Services</a></li>
       <li><a href="about.html">About</a></li>
-      <li><a href="contact.html" class="active">Contact</a></li>
+      <li><a href="contact.html" class="active">Contact Us</a></li>
+      <li><a href="terms-and-conditions.html">Terms &amp; Conditions</a></li>
+      <li><a href="privacy-policy.html">Privacy Policy</a></li>
     </ul>
     <a href="contact.html" class="btn btn--primary nav__mobile__cta">Get in Touch</a>
   </div>
@@ -80,7 +84,7 @@
           <input type="email" id="email" name="email" placeholder="you@company.com" required>
         </div>
         <div class="fg">
-          <label for="phone">Phone Number</label>
+          <label for="phone">Phone Number <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--dim);">(optional)</span></label>
           <input type="tel" id="phone" name="phone" placeholder="(555) 000-0000">
         </div>
       </div>
@@ -157,9 +161,22 @@
         <p class="rfp-note">Your file goes directly into our secure Dropbox folder. We review all RFPs within one business day.</p>
       </div>
 
+      <div class="consent-group">
+        <label class="consent-item">
+          <input type="checkbox" name="sms_transactional_consent" value="Yes - consents to transactional SMS from THE RIDGEVIEW COMPANY LLC">
+          <span>By checking this box, I consent to receive transactional messages related to my account, orders, or services I have requested from THE RIDGEVIEW COMPANY LLC. These messages may include appointment reminders, order confirmations, and account notifications, among others. You may receive up to 4 messages per month. Message &amp; data rates may apply. Reply HELP for help or STOP to opt out.</span>
+        </label>
+        <label class="consent-item">
+          <input type="checkbox" name="sms_marketing_consent" value="Yes - consents to marketing SMS from THE RIDGEVIEW COMPANY LLC">
+          <span>By checking this box, I consent to receive marketing and promotional messages, including special offers, discounts, and new product updates from THE RIDGEVIEW COMPANY LLC. Message frequency may vary. You may receive up to 4 messages per month. Message &amp; data rates may apply. Reply HELP for help or STOP to opt out.</span>
+        </label>
+      </div>
+
       <button type="submit" id="submit-btn" class="btn btn--primary" style="width:100%;justify-content:center;font-size:1rem;padding:1.05rem;">
         Submit Request
       </button>
+
+      <p class="form-legal">By submitting this form, you agree to our <a href="terms-and-conditions.html">Terms &amp; Conditions</a> and <a href="privacy-policy.html">Privacy Policy</a>.</p>
     </form>
 
     <div id="form-success" style="display:none;text-align:center;padding:3rem 1rem;">
@@ -207,6 +224,19 @@
     <div class="info-card">
       <div class="info-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+          <circle cx="12" cy="10" r="3"/>
+        </svg>
+      </div>
+      <div>
+        <div class="info-title">Business Address</div>
+        <div class="info-body">THE RIDGEVIEW COMPANY LLC<br>4019 West 133rd St<br>Hawthorne, CA 90250</div>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="12" r="10"/>
           <polyline points="12 6 12 12 16 14"/>
         </svg>
@@ -244,13 +274,25 @@
       <ul>
         <li><a href="about.html">About Us</a></li>
         <li><a href="about.html">Our Team</a></li>
-        <li><a href="contact.html">Contact</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+    </div>
+    <div class="footer__col footer__contact">
+      <h4>Contact &amp; Legal</h4>
+      <ul>
+        <li class="footer__legal-name">THE RIDGEVIEW COMPANY LLC</li>
+        <li><address>4019 West 133rd St<br>Hawthorne, CA 90250</address></li>
+        <li><a href="tel:+15623211858">+1 562-321-1858</a></li>
+        <li><a href="mailto:info@ridgeviewevents.com">info@ridgeviewevents.com</a></li>
+        <li><a href="https://www.ridgeviewevents.com">www.ridgeviewevents.com</a></li>
+        <li><a href="terms-and-conditions.html">Terms &amp; Conditions</a></li>
+        <li><a href="privacy-policy.html">Privacy Policy</a></li>
       </ul>
     </div>
   </div>
   <div class="footer__bottom">
-    <span>&copy; 2026 RidgeView Event Technology. All rights reserved.</span>
-    <span>Privacy Policy &middot; Terms of Service</span>
+    <span>&copy; 2026 THE RIDGEVIEW COMPANY LLC (RidgeView Event Technology). All rights reserved.</span>
+    <span class="footer__legal-links"><a href="terms-and-conditions.html">Terms &amp; Conditions</a> &middot; <a href="privacy-policy.html">Privacy Policy</a></span>
   </div>
 </footer>
 

@@ -15,6 +15,7 @@
   --muted:       #b0a898;
   --dim:         #5a6a80;
   --white:       #ffffff;
+  --link:        #7aa7ff;
   --r:           8px;
   --rl:          14px;
   --max:         1200px;
@@ -137,16 +138,17 @@ h1, h2, h3, h4, h5 {
 .nav__logo img { height: 76px; width: auto; }
 .nav__links {
   display: flex;
-  gap: .4rem;
+  gap: .2rem;
   list-style: none;
 }
 .nav__links a {
   font-family: 'Montserrat', sans-serif;
-  font-size: 1.25rem;
+  font-size: .95rem;
   font-weight: 600;
   color: var(--muted);
-  padding: .75rem 2rem;
+  padding: .55rem .85rem;
   border-radius: 6px;
+  white-space: nowrap;
   transition: color .15s, background .15s;
 }
 .nav__links a:hover,
@@ -508,6 +510,7 @@ h1, h2, h3, h4, h5 {
   margin: 0 auto;
   padding: 7rem 4rem;
 }
+.contact-layout > * { min-width: 0; }
 .form-card {
   background: var(--surface-2);
   border: 1px solid var(--border);
@@ -644,6 +647,50 @@ h1, h2, h3, h4, h5 {
 .info-body a { color: var(--accent); }
 .info-body a:hover { text-decoration: underline; }
 
+/* SMS consent checkboxes (A2P 10DLC) */
+.consent-group {
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+  margin: .5rem 0 1.5rem;
+}
+.consent-item {
+  display: flex;
+  align-items: flex-start;
+  gap: .75rem;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r);
+  padding: .9rem 1rem;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-size: .82rem;
+  line-height: 1.6;
+  color: var(--muted);
+  transition: border-color .15s, background .15s;
+}
+.consent-item:hover { border-color: rgba(37,99,235,.5); }
+.consent-item:has(input:checked) { border-color: var(--accent); background: var(--accent-glow); }
+.consent-item input[type="checkbox"] {
+  accent-color: var(--accent);
+  width: 16px;
+  height: 16px;
+  margin-top: .2rem;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+.form-legal {
+  font-size: .8rem;
+  color: var(--muted);
+  text-align: center;
+  margin-top: 1rem;
+  line-height: 1.6;
+}
+.form-legal a,
+.footer__legal-links a { color: var(--link); text-decoration: underline; text-underline-offset: 3px; }
+.form-legal a:hover,
+.footer__legal-links a:hover { color: var(--white); }
+
 /* ── FOOTER ──────────────────────────────────────────────────── */
 footer { background: var(--bg); border-top: 1px solid var(--border); }
 .footer__main {
@@ -651,7 +698,7 @@ footer { background: var(--bg); border-top: 1px solid var(--border); }
   margin: 0 auto;
   padding: 5rem 4rem;
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-columns: 1.6fr 1fr 1fr 1.5fr;
   gap: 3rem;
 }
 .footer__brand img { height: 42px; width: auto; margin-bottom: 1.1rem; }
@@ -674,23 +721,78 @@ footer { background: var(--bg); border-top: 1px solid var(--border); }
 .footer__col ul { list-style: none; display: flex; flex-direction: column; gap: .55rem; }
 .footer__col a { font-size: .87rem; color: var(--muted); transition: color .15s; }
 .footer__col a:hover { color: var(--white); }
+.footer__contact li { font-size: .87rem; color: var(--muted); line-height: 1.6; overflow-wrap: anywhere; }
+.footer__contact address { font-style: normal; }
+.footer__legal-name {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  color: var(--white) !important;
+  letter-spacing: .02em;
+}
 .footer__bottom {
   border-top: 1px solid var(--border);
   padding: 1.8rem 4rem;
   max-width: var(--max);
   margin: 0 auto;
   display: flex;
+  flex-wrap: wrap;
+  gap: .5rem 2rem;
   justify-content: space-between;
   align-items: center;
   font-size: .78rem;
   color: var(--dim);
 }
 
+/* ── LEGAL PAGES (Privacy Policy, Terms & Conditions) ────────── */
+.legal-content { max-width: 80ch; font-size: 1rem; line-height: 1.75; }
+.legal-content .legal-updated {
+  font-family: 'Montserrat', sans-serif;
+  font-size: .8rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-bottom: 2rem;
+}
+.legal-content h2 {
+  font-size: 1.45rem;
+  letter-spacing: -.01em;
+  margin: 3rem 0 1rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+.legal-content h3 { font-size: 1.1rem; margin: 2rem 0 .7rem; }
+.legal-content h4 { font-size: .95rem; color: var(--cream); margin: 1.5rem 0 .5rem; }
+.legal-content p { color: var(--muted); margin-bottom: 1rem; }
+.legal-content ul { color: var(--muted); margin: 0 0 1.25rem 1.4rem; }
+.legal-content li { margin-bottom: .45rem; padding-left: .2rem; }
+.legal-content li::marker { color: var(--accent); }
+.legal-content strong { color: var(--text); font-weight: 600; }
+.legal-content a { color: var(--link); text-decoration: underline; text-underline-offset: 3px; overflow-wrap: anywhere; }
+.legal-content a:hover { color: var(--white); }
+.legal-contact {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--rl);
+  padding: 1.5rem 1.75rem;
+}
+.legal-contact p { margin-bottom: .35rem; }
+.legal-contact p:last-child { margin-bottom: 0; }
+
 /* ── SCROLL REVEAL ───────────────────────────────────────────── */
 .reveal { opacity: 0; transform: translateY(22px); transition: opacity .6s ease, transform .6s ease; }
 .reveal.visible { opacity: 1; transform: none; }
 
 /* ── RESPONSIVE ──────────────────────────────────────────────── */
+/* Six nav links: drop the duplicate CTA, then switch to the hamburger menu */
+@media (max-width: 1440px) {
+  .nav__cta { display: none; }
+  .nav__logo img { height: 60px; }
+}
+@media (max-width: 1180px) {
+  .nav__links { display: none; }
+  .nav__hamburger { display: flex; }
+}
 @media (max-width: 1024px) {
   .services-grid { grid-template-columns: repeat(2, 1fr); }
 }
@@ -729,6 +831,9 @@ footer { background: var(--bg); border-top: 1px solid var(--border); }
   .footer__bottom { flex-direction: column; gap: .5rem; text-align: center; padding: 1.5rem; }
   .fg-row { grid-template-columns: 1fr; }
   .checkbox-group { grid-template-columns: 1fr; }
+  .contact-layout { padding: 3rem 1.5rem; }
+  .form-card { padding: 1.75rem 1.25rem; }
+  .rfp-upload { flex-wrap: wrap; }
   .trust-strip__inner { gap: 1rem; justify-content: flex-start; }
   .trust-divider { display: none; }
 }
